@@ -13,5 +13,7 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/attapi-basic-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

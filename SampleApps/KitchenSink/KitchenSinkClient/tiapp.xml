@@ -14,7 +14,7 @@
     <publisher>AT&amp;T API</publisher>
     <url>http://developer.att.com</url>
     <description>not specified</description>
-    <copyright>2012 by ATT</copyright>
+    <copyright>2013 by ATT</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
@@ -52,7 +52,7 @@
     <property name="accessKey">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</property>
     <property name="secretKey">XXXXXXXXXXXXXXXX</property>
     <property name="shortCode">XXXXXXXX</property>
-    <property name="scope">CMS,DC,MMS,PAYMENT,SMS,SPEECH</property>
+    <property name="scope">CMS,MMS,PAYMENT,SMS,SPEECH</property>
     <property name="authScope">TL,IMMN,MIM</property>
     <property name="merchantID">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</property>
     <property name="amount">0.99</property>
@@ -60,8 +60,8 @@
     <property name="paymentServerUrl">http://attdemo.somee.com/ATTNotifications/</property>
     <property name="redirectUrl">http://attdemo.somee.com/AttNotifications/SuccessfulAuthentication.html</property>
     <modules>
-        <module platform="commonjs" version="1.0.3">att</module>
-        <module platform="android" version="1.0.3">ti.api.att</module>
+        <module platform="commonjs" version="1.1.0">att</module>
         <module platform="iphone" version="1.0.3">ti.api.att</module>
+        <module platform="android" version="1.1.0">ti.api.att</module>
     </modules>
 </ti:app>
