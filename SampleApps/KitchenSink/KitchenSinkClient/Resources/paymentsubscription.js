@@ -25,13 +25,17 @@ var responseWindow = Ti.UI.createWindow({
 	backgroundColor : 'white',
 	title : 'Response'
 });
+var responseNav = Ti.UI.iOS.createNavigationWindow({
+    modal: true,
+	window: responseWindow
+});
 
 responseWindow.addEventListener('android:back', function(e) {
 	if (webview !== null) {
 		responseWindow.remove(webview);
 		webview = null;
 	}
-	responseWindow.close();
+	responseNav.close();
 });
 
 var responseWinRightNavButton = Ti.UI.createButton({
@@ -49,7 +53,7 @@ responseWinRightNavButton.addEventListener('click', function() {"use strict";
 		responseWindow.remove(webview);
 		webview = null;
 	}
-	responseWindow.close();
+	responseNav.close();
 });
 mainWinClose.addEventListener('click', function() {"use strict";
 	mainWindow.close();
@@ -78,7 +82,7 @@ responseWindow.add(responseView);
 function openPopUp(data) {
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseWindow.open();
+	responseNav.open();
 }
 
 var header = Ti.UI.createLabel({
@@ -269,12 +273,12 @@ function signPayload() {
 					index = url.indexOf("SubscriptionAuthCode");
 					Ti.App.subscriptionAuthCode = url.substr(index + 21, url.length + 1);
 					responseWindow.remove(webview);
-					responseWindow.close();
+					responseNav.close();
 				}
 			});
 
 			responseWindow.add(webview);
-			responseWindow.open();
+			responseNav.open();
 
 		}, function(error) {
 			Ti.API.error('Error Callback:' + JSON.stringify(error));

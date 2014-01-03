@@ -27,9 +27,13 @@ var responseWindow = Ti.UI.createWindow({
 	backgroundColor : 'white',
 	title : 'Response'
 });
+    var responseNav = Ti.UI.iOS.createNavigationWindow({
+    modal: true,
+	window: responseWindow
+});
 
 responseWindow.addEventListener('android:back', function(e) {'use strict';
-	responseWindow.close();
+	responseNav.close();
 });
 
 var responseWinRightNavButton = Ti.UI.createButton({
@@ -38,7 +42,7 @@ var responseWinRightNavButton = Ti.UI.createButton({
 });
 
 responseWinRightNavButton.addEventListener('click', function() {"use strict";
-	responseWindow.close();
+	responseNav.close();
 });
 // //For Iphone Only.
 if (Titanium.Platform.osname !== "android") {
@@ -61,7 +65,7 @@ responseWindow.add(responseView);
 function openPopUp(data) {'use strict';
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseWindow.open();
+	responseNav.open();
 }
 
 
@@ -294,7 +298,7 @@ function sendMessage()
 		} else {
 			responseLable.text = 'RESPONSE :' + data;
 		}
-		responseWindow.open();
+		responseNav.open();
 		
 		for(cnt=(dispAttachment.children.length-1);cnt>=0;cnt--){
 			dispAttachment.remove(dispAttachment.children[cnt]);
@@ -329,7 +333,7 @@ function getMessageHeaders()
 		
 		responseLable.text = null;
 		responseLable.text = 'RESPONSE :' + data;
-		responseWindow.open();
+		responseNav.open();
 		
 	}, function(error) {
 		Ti.API.error('Error Callback:' + JSON.stringify(error));
@@ -360,7 +364,7 @@ function getMessageContent()
 		    text += '\nData: ' + data;
 		}
 		responseLable.text = text;
-		responseWindow.open();
+		responseNav.open();
 	}, function(error) {
 		Ti.API.error('Error Callback:' + JSON.stringify(error));
 		openPopUp(JSON.stringify(error));

@@ -20,10 +20,14 @@ var responseWindow = Ti.UI.createWindow({
 	backgroundColor : 'white',
 	title : 'Response'
 });
+var responseNav = Ti.UI.iOS.createNavigationWindow({
+    modal: true,
+	window: responseWindow
+});
 
 responseWindow.addEventListener('android:back', function(e) {
 	'use strict';
-	responseWindow.close();
+	responseNav.close();
 });
 
 var responseWinRightNavButton = Ti.UI.createButton({
@@ -32,7 +36,7 @@ var responseWinRightNavButton = Ti.UI.createButton({
 });
 
 responseWinRightNavButton.addEventListener('click', function() {"use strict";
-	responseWindow.close();
+	responseNav.close();
 });
 // //For Iphone Only.
 if (Titanium.Platform.osname !== "android") {
@@ -56,7 +60,7 @@ function openPopUp(data) {
 	'use strict';
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseWindow.open();
+	responseNav.open();
 }
 
 var rightNavButton = Ti.UI.createButton({

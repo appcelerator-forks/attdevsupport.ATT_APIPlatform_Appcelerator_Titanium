@@ -109,7 +109,7 @@ if(state.device.is.android) {
         
         picker.add([selectedView, selectedButton]);
         picker.addEventListener('click', function(e) {
-            popupWindow.open();
+            popupNav.open();
         });
         
         picker.setValue = function(val) {
@@ -137,14 +137,17 @@ if(state.device.is.android) {
             backgroundColor : 'white',
             title : 'Data Window'
         });
-        
+        var popupNav = Ti.UI.iOS.createNavigationWindow({
+        modal: true,
+        window: popupWindow
+        });
         //Add Complete button
         var modalWinRightNavButton = Ti.UI.createButton({
             style : Ti.UI.iPhone.SystemButtonStyle.DONE,
             title : 'Done'
         });
         modalWinRightNavButton.addEventListener('click', function() {
-            popupWindow.close();
+            popupNav.close();
         });
         popupWindow.setRightNavButton(modalWinRightNavButton);
         
@@ -208,9 +211,12 @@ function createResponseWindow() {
         backgroundColor : 'white',
         title : 'Response'
     });
-    
+var responseNav = Ti.UI.iOS.createNavigationWindow({
+    modal: true,
+    window: responseWindow
+    });    
     responseWindow.addEventListener('android:back', function(e) {
-        responseWindow.close();
+        responseNav.close();
     });
     
     //For non android
@@ -221,7 +227,7 @@ function createResponseWindow() {
         });
         
         responseWinRightNavButton.addEventListener('click', function() {
-            responseWindow.close();
+            responseNav.close();
         });
         
         responseWindow.setRightNavButton(responseWinRightNavButton);
@@ -249,7 +255,7 @@ function createResponseWindow() {
         responseStr += ': ' + ((typeof data === 'string') ? data : JSON.stringify(data, null, 3));
         
         responseLabel.text = responseStr;
-        responseWindow.open();
+        responseNav.open();
     };
 }
 
@@ -361,8 +367,13 @@ function createGetFilePathWindow(folderPath, filePathCB, errorCB) {
         backgroundColor : 'white'
     });
     
+    var modalNav = Ti.UI.iOS.createNavigationWindow({
+    modal: true,
+    window: modalWindow
+    });
+
     function close() {
-        modalWindow.close();
+        modalNav.close();
         if(selectedRow) {
             var file = selectedRow.file || Ti.Filesystem.getFile(folderPath, selectedRow.title);
             
@@ -383,7 +394,7 @@ function createGetFilePathWindow(folderPath, filePathCB, errorCB) {
     
     modalWindow.addEventListener('android:back', close);
     modalWindow.add(fileBrowserTable);
-    modalWindow.open();
+    modalNav.open();
 }
 
 

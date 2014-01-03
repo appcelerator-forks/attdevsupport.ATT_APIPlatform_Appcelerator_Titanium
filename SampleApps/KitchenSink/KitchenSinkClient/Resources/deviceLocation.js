@@ -22,9 +22,14 @@ var responseWindow = Ti.UI.createWindow({
 	backgroundColor : 'white',
 	title : 'Response'
 });
+var ResponseNav = Ti.UI.iOS.createNavigationWindow({
+    modal: true,
+	window: responseWindow
+});
+
 
 responseWindow.addEventListener('android:back', function(e) {'use strict';
-	responseWindow.close();
+	ResponseNav.close();
 
 });
 
@@ -34,7 +39,7 @@ var responseWinRightNavButton = Ti.UI.createButton({
 });
 
 responseWinRightNavButton.addEventListener('click', function() {"use strict";
-	responseWindow.close();
+	ResponseNav.close();
 
 });
 // //For Iphone Only.
@@ -58,7 +63,7 @@ responseWindow.add(responseView);
 function openPopUp(data) {'use strict';
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseWindow.open();
+	ResponseNav.open();
 }
 
 

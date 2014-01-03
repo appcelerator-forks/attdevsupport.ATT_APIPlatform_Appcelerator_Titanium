@@ -32,6 +32,10 @@ function openWindow(url, title) {
 		modal : true,
 		title : title
 	});
-	win.open();
+var winNav = Ti.UI.iOS.createNavigationWindow({
+    modal: true,
+	window: win
+});
+	winNav.open();
 }
 

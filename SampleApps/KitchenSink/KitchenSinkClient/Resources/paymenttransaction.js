@@ -27,12 +27,17 @@ var responseWindow = Ti.UI.createWindow({
 	title : 'Response'
 });
 
+var responseNav = Ti.UI.iOS.createNavigationWindow({
+    modal: true,
+	window: responseWindow
+});
+
 responseWindow.addEventListener('android:back', function(e) {
 	if (webview !== null) {
 		responseWindow.remove(webview);
 		webview = null;
 	}
-	responseWindow.close();
+	responseNav.close();
 });
 
 var responseWinRightNavButton = Ti.UI.createButton({
@@ -50,7 +55,7 @@ responseWinRightNavButton.addEventListener('click', function() {"use strict";
 		responseWindow.remove(webview);
 		webview = null;
 	}
-	responseWindow.close();
+	responseNav.close();
 });
 mainWinClose.addEventListener('click', function() {"use strict";
 	mainWindow.close();
@@ -79,7 +84,7 @@ responseWindow.add(responseView);
 function openPopUp(data) {
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseWindow.open();
+	responseNav.open();
 }
 
 var header = Ti.UI.createLabel({
@@ -172,11 +177,11 @@ function signPayload(callBack) {
 					authCode = url.substr(index + 20, url.length + 1);
 					Ti.App.AuthCode = authCode;
 					responseWindow.remove(webview);
-					responseWindow.close();
+					responseNav.close();
 				}
 			});
 			responseWindow.add(webview);
-			responseWindow.open();
+			responseNav.open();
 		}, function(error) {
 			Ti.API.error('Error Callback:' + JSON.stringify(error));
 			openPopUp(JSON.stringify(error));
@@ -297,6 +302,7 @@ getNotification.addEventListener('click', function() {
 		modal : true,
 		type : 'SuccesfulRefund'
 	});
+	
 	win.open();
 });
 
