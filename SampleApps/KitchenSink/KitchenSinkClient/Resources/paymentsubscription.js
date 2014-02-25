@@ -25,10 +25,13 @@ var responseWindow = Ti.UI.createWindow({
 	backgroundColor : 'white',
 	title : 'Response'
 });
-var responseNav = Ti.UI.iOS.createNavigationWindow({
-    modal: true,
-	window: responseWindow
-});
+
+if (Titanium.Platform.osname !== "android") {
+	var responseNav = Ti.UI.iOS.createNavigationWindow({
+	    modal: true,
+		window: responseWindow
+	});
+}
 
 responseWindow.addEventListener('android:back', function(e) {
 	if (webview !== null) {

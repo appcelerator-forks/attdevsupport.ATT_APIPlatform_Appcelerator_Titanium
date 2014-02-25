@@ -32,10 +32,12 @@ function openWindow(url, title) {
 		modal : true,
 		title : title
 	});
-var winNav = Ti.UI.iOS.createNavigationWindow({
-    modal: true,
-	window: win
-});
+if (Titanium.Platform.osname !== "android") {
+	var winNav = Ti.UI.iOS.createNavigationWindow({
+	    modal: true,
+		window: win
+	});
+}
 	if (Titanium.Platform.osname !== "android") {
 		winNav.open();
 	}

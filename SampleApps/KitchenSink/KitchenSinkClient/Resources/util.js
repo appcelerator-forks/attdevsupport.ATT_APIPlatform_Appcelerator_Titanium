@@ -143,10 +143,12 @@ if(state.device.is.android) {
             title : 'Data Window'
         });
         
-        var popupNav = Ti.UI.iOS.createNavigationWindow({
-        modal: true,
-        window: popupWindow
-        });
+        if (Titanium.Platform.osname !== "android") {
+	        var popupNav = Ti.UI.iOS.createNavigationWindow({
+	        modal: true,
+	        window: popupWindow
+	        });
+	    }
         
         //Add Complete button
         var modalWinRightNavButton = Ti.UI.createButton({
@@ -223,10 +225,12 @@ function createResponseWindow() {
         backgroundColor : 'white',
         title : 'Response'
     });
+if (Titanium.Platform.osname !== "android") {
 var responseNav = Ti.UI.iOS.createNavigationWindow({
     modal: true,
     window: responseWindow
-    });    
+    }); 
+ }
     responseWindow.addEventListener('android:back', function(e) {
         responseWindow.close();
     });
@@ -384,10 +388,12 @@ function createGetFilePathWindow(folderPath, filePathCB, errorCB) {
         backgroundColor : 'white'
     });
     
-    var modalNav = Ti.UI.iOS.createNavigationWindow({
-    modal: true,
-    window: modalWindow
-    });
+    if (Titanium.Platform.osname !== "android") {
+	    var modalNav = Ti.UI.iOS.createNavigationWindow({
+	    modal: true,
+	    window: modalWindow
+	    });
+	}
 
     function close() {
         if (Titanium.Platform.osname !== "android") {
