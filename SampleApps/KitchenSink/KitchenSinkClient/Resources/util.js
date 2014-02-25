@@ -109,7 +109,12 @@ if(state.device.is.android) {
         
         picker.add([selectedView, selectedButton]);
         picker.addEventListener('click', function(e) {
-            popupNav.open();
+            if (Titanium.Platform.osname !== "android") {
+				popupNav.open();
+			}
+			else {
+				popupWindow.open();
+			}
         });
         
         picker.setValue = function(val) {
@@ -137,17 +142,24 @@ if(state.device.is.android) {
             backgroundColor : 'white',
             title : 'Data Window'
         });
+        
         var popupNav = Ti.UI.iOS.createNavigationWindow({
         modal: true,
         window: popupWindow
         });
+        
         //Add Complete button
         var modalWinRightNavButton = Ti.UI.createButton({
             style : Ti.UI.iPhone.SystemButtonStyle.DONE,
             title : 'Done'
         });
         modalWinRightNavButton.addEventListener('click', function() {
-            popupNav.close();
+        if (Titanium.Platform.osname !== "android") {
+			popupNav.open();
+		}
+		else {
+			popupWindow.open();
+		}
         });
         popupWindow.setRightNavButton(modalWinRightNavButton);
         
@@ -216,7 +228,7 @@ var responseNav = Ti.UI.iOS.createNavigationWindow({
     window: responseWindow
     });    
     responseWindow.addEventListener('android:back', function(e) {
-        responseNav.close();
+        responseWindow.close();
     });
     
     //For non android
@@ -255,7 +267,12 @@ var responseNav = Ti.UI.iOS.createNavigationWindow({
         responseStr += ': ' + ((typeof data === 'string') ? data : JSON.stringify(data, null, 3));
         
         responseLabel.text = responseStr;
-        responseNav.open();
+        if (Titanium.Platform.osname !== "android") {
+			responseNav.open();
+		}
+		else {
+			responseWindow.open();
+		}
     };
 }
 
@@ -373,7 +390,12 @@ function createGetFilePathWindow(folderPath, filePathCB, errorCB) {
     });
 
     function close() {
-        modalNav.close();
+        if (Titanium.Platform.osname !== "android") {
+			modalNav.close();
+		}
+		else {
+			modalWindow.close();
+		}
         if(selectedRow) {
             var file = selectedRow.file || Ti.Filesystem.getFile(folderPath, selectedRow.title);
             
@@ -394,7 +416,12 @@ function createGetFilePathWindow(folderPath, filePathCB, errorCB) {
     
     modalWindow.addEventListener('android:back', close);
     modalWindow.add(fileBrowserTable);
-    modalNav.open();
+    if (Titanium.Platform.osname !== "android") {
+		modalNav.open();
+	}
+	else {
+		modalWindow.open();
+	}
 }
 
 

@@ -27,13 +27,14 @@ var responseWindow = Ti.UI.createWindow({
 	backgroundColor : 'white',
 	title : 'Response'
 });
-    var responseNav = Ti.UI.iOS.createNavigationWindow({
+
+var responseNav = Ti.UI.iOS.createNavigationWindow({
     modal: true,
 	window: responseWindow
 });
 
 responseWindow.addEventListener('android:back', function(e) {'use strict';
-	responseNav.close();
+	responseWindow.close();
 });
 
 var responseWinRightNavButton = Ti.UI.createButton({
@@ -44,6 +45,7 @@ var responseWinRightNavButton = Ti.UI.createButton({
 responseWinRightNavButton.addEventListener('click', function() {"use strict";
 	responseNav.close();
 });
+
 // //For Iphone Only.
 if (Titanium.Platform.osname !== "android") {
 	responseWindow.setRightNavButton(responseWinRightNavButton);
@@ -65,7 +67,12 @@ responseWindow.add(responseView);
 function openPopUp(data) {'use strict';
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseNav.open();
+	if (Titanium.Platform.osname !== "android") {
+		responseNav.open();
+	}
+	else {
+		responseWindow.open();
+	}
 }
 
 
@@ -298,7 +305,12 @@ function sendMessage()
 		} else {
 			responseLable.text = 'RESPONSE :' + data;
 		}
+		if (Titanium.Platform.osname !== "android") {
 		responseNav.open();
+		}
+		else {
+		responseWindow.open();
+		}
 		
 		for(cnt=(dispAttachment.children.length-1);cnt>=0;cnt--){
 			dispAttachment.remove(dispAttachment.children[cnt]);
@@ -333,7 +345,12 @@ function getMessageHeaders()
 		
 		responseLable.text = null;
 		responseLable.text = 'RESPONSE :' + data;
+		if (Titanium.Platform.osname !== "android") {
 		responseNav.open();
+		}
+		else {
+		responseWindow.open();
+		}
 		
 	}, function(error) {
 		Ti.API.error('Error Callback:' + JSON.stringify(error));
@@ -364,7 +381,12 @@ function getMessageContent()
 		    text += '\nData: ' + data;
 		}
 		responseLable.text = text;
+		if (Titanium.Platform.osname !== "android") {
 		responseNav.open();
+		}
+		else {
+		responseWindow.open();
+		}
 	}, function(error) {
 		Ti.API.error('Error Callback:' + JSON.stringify(error));
 		openPopUp(JSON.stringify(error));

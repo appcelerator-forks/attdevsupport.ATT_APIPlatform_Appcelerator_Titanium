@@ -35,7 +35,7 @@ responseWindow.addEventListener('android:back', function(e) {
 		responseWindow.remove(webview);
 		webview = null;
 	}
-	responseNav.close();
+	responseWindow.close();
 });
 
 var responseWinRightNavButton = Ti.UI.createButton({
@@ -82,7 +82,12 @@ responseWindow.add(responseView);
 function openPopUp(data) {
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseNav.open();
+	if (Titanium.Platform.osname !== "android") {
+		responseNav.open();
+	}
+	else {
+		responseWindow.open();
+	}
 }
 
 var header = Ti.UI.createLabel({
@@ -273,12 +278,22 @@ function signPayload() {
 					index = url.indexOf("SubscriptionAuthCode");
 					Ti.App.subscriptionAuthCode = url.substr(index + 21, url.length + 1);
 					responseWindow.remove(webview);
-					responseNav.close();
+					if (Titanium.Platform.osname !== "android") {
+						responseNav.close();
+					}
+					else {
+						responseWindow.close();
+					}
 				}
 			});
 
 			responseWindow.add(webview);
-			responseNav.open();
+			if (Titanium.Platform.osname !== "android") {
+				responseNav.open();
+			}
+			else {
+				responseWindow.open();
+			}
 
 		}, function(error) {
 			Ti.API.error('Error Callback:' + JSON.stringify(error));

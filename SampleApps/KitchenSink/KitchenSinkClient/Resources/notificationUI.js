@@ -27,7 +27,7 @@ var responseNav = Ti.UI.iOS.createNavigationWindow({
 
 responseWindow.addEventListener('android:back', function(e) {
 	'use strict';
-	responseNav.close();
+	responseWindow.close();
 });
 
 var responseWinRightNavButton = Ti.UI.createButton({
@@ -60,7 +60,12 @@ function openPopUp(data) {
 	'use strict';
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseNav.open();
+	if (Titanium.Platform.osname !== "android") {
+		responseNav.open();
+	}
+	else {
+		responseWindow.open();
+	}
 }
 
 var rightNavButton = Ti.UI.createButton({

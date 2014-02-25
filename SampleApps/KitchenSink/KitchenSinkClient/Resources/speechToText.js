@@ -143,7 +143,12 @@ if (!deviceState.is.android) {
         });
         
         win.setRightNavButton(recorderClose);
-        winNav.open();
+        if (Titanium.Platform.osname !== "android") {
+			winNav.open();
+		}
+		else {
+			win.open();
+		}
     });
     scrollView.add(recorder);
 }

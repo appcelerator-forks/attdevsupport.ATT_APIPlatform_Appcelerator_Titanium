@@ -36,6 +36,11 @@ var winNav = Ti.UI.iOS.createNavigationWindow({
     modal: true,
 	window: win
 });
-	winNav.open();
+	if (Titanium.Platform.osname !== "android") {
+		winNav.open();
+	}
+	else {
+		win.open();
+	}
 }
 
