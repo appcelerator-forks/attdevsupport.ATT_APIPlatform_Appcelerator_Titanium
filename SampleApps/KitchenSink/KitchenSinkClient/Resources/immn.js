@@ -108,22 +108,22 @@ var text = Ti.UI.createTextField({
 var GetAttachment = Ti.UI.createButton({
 	title : 'Attachment',
 	top : Ti.UI.Android ? "300dp" : 260,
-	height : Ti.UI.Android ? "30dp" : 30
+	height : Ti.UI.Android ? "35dp" : 30
 });
 var immnSendMessageButton = Ti.UI.createButton({
 	title : 'Send Message',
 	top : Ti.UI.Android ? "340dp" : 300,
-	height : Ti.UI.Android ? "30dp" : 30
+	height : Ti.UI.Android ? "35dp" : 30
 });
 var GetimmnMessageHeaderBtn = Ti.UI.createButton({
 	title : 'Get Message Headers',
 	top : Ti.UI.Android ? "380dp" : 340,
-	height : Ti.UI.Android ? "30dp" : 30
+	height : Ti.UI.Android ? "35dp" : 30
 });
 var GetimmnMessageContentBtn = Ti.UI.createButton({
 	title : 'Get Message Content',
 	top : Ti.UI.Android ? "420dp" : 380,
-	height : Ti.UI.Android ? "30dp" : 30
+	height : Ti.UI.Android ? "35dp" : 30
 });
 var dispAttachment = Ti.UI.createScrollView({
 	top : 170,

@@ -36,10 +36,11 @@ apiDetails.forEach(function(apiDetail) {
 
 // Listen for click events.
 apiList.addEventListener('click', function(e) {
+	
 	Ti.API.info(e.rowData.id + ' clicked.');
 	if(e.rowData.id) {
 		var win = Titanium.UI.createWindow({
-			title : e.rowData.id, url : e.rowData.url, backgroundColor : '#fff'
+			title : e.rowData.id, url : e.rowData.url, backgroundColor : '#fff',navBarHidden:false
 		});
 		
 		if(isAndroid) {
