@@ -157,10 +157,10 @@ if(state.device.is.android) {
         });
         modalWinRightNavButton.addEventListener('click', function() {
         if (Titanium.Platform.osname !== "android") {
-			popupNav.open();
+			popupNav.close();
 		}
 		else {
-			popupWindow.open();
+			popupWindow.close();
 		}
         });
         popupWindow.setRightNavButton(modalWinRightNavButton);
