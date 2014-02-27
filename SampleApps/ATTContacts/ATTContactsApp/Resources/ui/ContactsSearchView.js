@@ -18,7 +18,7 @@ if(!accessKey || accessKey[0] === 'X') {
 }
 
 //Set up the keys for the ATT module
-attAPIs.ATT.authorize(accessKey, secretKey, 'MMS,SPEECH,SMS', 'client_credentials');
+attAPIs.ATT.authorize(accessKey, secretKey, 'MMS,SPEECH,SMS,STTC', 'client_credentials');
 
 contacts.fetch(); //Get the contacts list from online
 
