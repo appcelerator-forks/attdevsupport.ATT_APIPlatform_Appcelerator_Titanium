@@ -29,26 +29,22 @@
  * 
  *• ATT.OAuth
  *
- *• ATT.Location
- *
  *• ATT.Notary
  *
  *• ATT.Speech
  *
  *• ATT.IMMN
- * 
-<span id='ATT-method-getCachedAccessToken'> *• ATT.CallManagement
-</span> */
-/**
- * @method getCachedAccessToken Returns the accessToken used for requests that is stored in memory.  If there is no token, it returns undefined
-<span id='ATT-method-getCachedUserAuthToken'> * @return {String}
-</span> */
-/**
- * @method getCachedUserAuthToken Returns the user consented OAuth token used for requests that is stored in memory.  If there is no token, it returns undefined
-<span id='ATT-SMS'> * @return {String}
-</span> */
-/**
- * @class ATT.SMS &lt;b&gt;Introduction:&lt;/b&gt;
+ */
+<span id='ATT-method-getCachedAccessToken'>/**
+</span> * @method getCachedAccessToken Returns the accessToken used for requests that is stored in memory.  If there is no token, it returns undefined
+ * @return {String}
+ */
+<span id='ATT-method-getCachedUserAuthToken'>/**
+</span> * @method getCachedUserAuthToken Returns the user consented OAuth token used for requests that is stored in memory.  If there is no token, it returns undefined
+ * @return {String}
+ */
+<span id='ATT-SMS'>/**
+</span> * @class ATT.SMS &lt;b&gt;Introduction:&lt;/b&gt;
  *
  * The Short Message Service (SMS) API enables authorized applications to send SMS messages to devices on the AT&amp;T network. The API also allows applications to query the delivery status of SMS messages sent from an application.
  *
@@ -62,10 +58,10 @@
  *
  *2) getSMSDeliveryStatus
  *
-<span id='ATT-SMS-method-sendSMS'> *3) sendSMS
-</span> */
-/**
- * @method sendSMS
+ *3) sendSMS
+ */
+<span id='ATT-SMS-method-sendSMS'>/**
+</span> * @method sendSMS
  * Sends an SMS message to a recipient.
  * @param {Object} options A JSON object containing the following properties:
  * @param {Object} options.body An Object containing the following properties:
@@ -93,12 +89,12 @@
  *
  * &lt;strong&gt;Examples:&lt;/strong&gt;
  *
- *&lt;b&gt;1.&lt;/b&gt; The following example of the sendSMS method uses a contentType of 'application/json'.
+ *&lt;b&gt;1.&lt;/b&gt; The following example of the sendSMS method uses a contentType of &#39;application/json&#39;.
  *
  *       sendSMS({
- *           'body':{&quot;message&quot;:&quot;Test AT&amp;T REST&quot;,  &quot;address&quot;:&quot;tel:xxxxxxxxxx&quot;},//For Multiple Phone Number :- &quot;address&quot;:[&quot;tel:xxxxxxxxxx&quot;,&quot;tel:xxxxxxxxxx&quot;]
- *           'accept' : 'application/json',
- *           'contentType' : 'application/json'
+ *           &#39;body&#39;:{&quot;message&quot;:&quot;Test AT&amp;T REST&quot;,  &quot;address&quot;:&quot;tel:xxxxxxxxxx&quot;},//For Multiple Phone Number :- &quot;address&quot;:[&quot;tel:xxxxxxxxxx&quot;,&quot;tel:xxxxxxxxxx&quot;]
+ *           &#39;accept&#39; : &#39;application/json&#39;,
+ *           &#39;contentType&#39; : &#39;application/json&#39;
  *       }, function(data) {
  *
  *           //success Callback
@@ -109,12 +105,12 @@
  *
  *       });
  *
- *&lt;b&gt;2.&lt;/b&gt; The following example of the sendSMS method uses a contentType of 'application/xml'.
+ *&lt;b&gt;2.&lt;/b&gt; The following example of the sendSMS method uses a contentType of &#39;application/xml&#39;.
  *
  *       sendSMS({
  *           &quot;body&quot;:&quot;&lt;outboundSMSRequest&gt;&lt;address&gt;tel:xxxxxxxxxx&lt;/address&gt;&lt;message&gt;Test XML &lt;/message&gt;&lt;/outboundSMSRequest&gt;&quot;,
- *           'accept' : 'application/json',
- *           'contentType' : 'application/xml'
+ *           &#39;accept&#39; : &#39;application/json&#39;,
+ *           &#39;contentType&#39; : &#39;application/xml&#39;
  *       }, function(data) {
  *
  *           //success Callback
@@ -126,12 +122,12 @@
  *       });
  *
  *
- * &lt;b&gt;3.&lt;/b&gt; The following example of the sendSMS method uses a contentType of 'application/x-www-form-urlencoded'.
+ * &lt;b&gt;3.&lt;/b&gt; The following example of the sendSMS method uses a contentType of &#39;application/x-www-form-urlencoded&#39;.
  *
  *       sendSMS({
  *           &quot;body&quot;:&quot;address=tel%3A%2B1xxxxxxxxxx&amp;address=tel%3A%2B1xxxxxxxxxx&amp;message=URL%20ENCODED&quot;,
- *           'accept' : 'application/json',
- *           'contentType' : 'application/x-www-form-urlencoded'
+ *           &#39;accept&#39; : &#39;application/json&#39;,
+ *           &#39;contentType&#39; : &#39;application/x-www-form-urlencoded&#39;
  *       }, function(data) {
  *
  *           //success Callback
@@ -142,10 +138,10 @@
  *
  *       });
  *
-<span id='ATT-SMS-method-getSMSDeliveryStatus'> * &lt;i&gt;Note: xxxxxxxxxx represents an AT&amp;T wireless number&lt;/i&gt;
-</span> */
-/**
- * @method getSMSDeliveryStatus
+ * &lt;i&gt;Note: xxxxxxxxxx represents an AT&amp;T wireless number&lt;/i&gt;
+ */
+<span id='ATT-SMS-method-getSMSDeliveryStatus'>/**
+</span> * @method getSMSDeliveryStatus
  * Checks the status of a sent SMS message.
  *
  * A final state is reached when the DeliveryStatus field of a DeliveryInfo object is set to one of the following values:
@@ -175,8 +171,8 @@
  * The following is an example of the getSMSDeliveryStatus method.
  *
  *      getSMSDeliveryStatus({
- *           'smsId' : &lt;put smsId here&gt;,
- *           'accept' : 'application/json'
+ *           &#39;smsId&#39; : &lt;put smsId here&gt;,
+ *           &#39;accept&#39; : &#39;application/json&#39;
  *
  *       }, function(data) {
  *
@@ -184,13 +180,13 @@
  *
  *       }, function(error) {
  *
-<span id='ATT-SMS-method-getSMS'> *            error Callback
-</span> *
+ *            error Callback
+ *
  *       });
  */
-/**
- * @method getSMS
- * Retrieves a list of SMS messages that were sent to the application's short code.
+<span id='ATT-SMS-method-getSMS'>/**
+</span> * @method getSMS
+ * Retrieves a list of SMS messages that were sent to the application&#39;s short code.
  * @param {Object} options A JSON object containing the following properties:
  * @param {String} options.registrationId The ID of the application which is a short code that is obtained when you register your application with AT&amp;T.
  * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
@@ -209,21 +205,21 @@
  * The following is an example of the getSMS method.
  *
  *      getSMS({
- *           'accept' : 'application/json',
- *           'registrationId' : &lt;put registrationId here&gt;
+ *           &#39;accept&#39; : &#39;application/json&#39;,
+ *           &#39;registrationId&#39; : &lt;put registrationId here&gt;
  *       }, function(data) {
  *
  *            success Callback
  *
  *       }, function(error) {
  *
-<span id='ATT-MMS'> *            error Callback
-</span> *
+ *            error Callback
+ *
  *       });
  */
 
-/**
- * @class ATT.MMS &lt;b&gt;Introduction:&lt;/b&gt;
+<span id='ATT-MMS'>/**
+</span> * @class ATT.MMS &lt;b&gt;Introduction:&lt;/b&gt;
  *
  * The Multimedia Messaging Service (MMS) API greatly enhances the power of your communications by moving beyond the text-only capabilities of Short Message Service (SMS) messaging. Using the MMS API, you can send Mobile Terminated or receive Mobile Originated) messages that include video, images and audio attachments as well as text.
  *
@@ -233,14 +229,14 @@
  *
  * &lt;b&gt;Methods:&lt;/b&gt;
  *
-<span id='ATT-MMS-method-sendMMS'> *1) getMMSDeliveryStatus
-</span> *
+ *1) getMMSDeliveryStatus
+ *
  *2) sendMMS
  *
  */
 
-/**
- * @method sendMMS
+<span id='ATT-MMS-method-sendMMS'>/**
+</span> * @method sendMMS
  *
  * Sends an MMS message to the specified recipient.
  *
@@ -271,13 +267,13 @@
  *
  * &lt;strong&gt;Examples:&lt;/strong&gt;
  *
- * &lt;b&gt;1.&lt;/b&gt; The following example of the sendMMS method uses a contentType of 'application/json'.
+ * &lt;b&gt;1.&lt;/b&gt; The following example of the sendMMS method uses a contentType of &#39;application/json&#39;.
  *
  *       sendMMS({
  *           &quot;body&quot;:{ &quot;address&quot; : &quot;tel:xxxxxxxxxx,tel:xxxxxxxxxx&quot;, &quot;subject&quot; : &quot;Test MMS&quot;, &quot;priority&quot; : &quot;High&quot; },
  *           &quot;contentType&quot; : &quot;application/json&quot;,
  *           &quot;accept&quot; : &quot;application/json&quot;,
- *           &quot;attachments&quot; : [{'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/png&quot;,'filePath' :&quot;Path of the file&quot;}, {'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/jpeg&quot;,'filePath' :&quot;Path of the file&quot;}]
+ *           &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
  *       }, function(data) {
  *
  *           //success Callback
@@ -288,13 +284,13 @@
  *
  *       });
  *
- * &lt;b&gt;2.&lt;/b&gt; The following example of the sendMMS method uses a contentType of 'application/xml'.
+ * &lt;b&gt;2.&lt;/b&gt; The following example of the sendMMS method uses a contentType of &#39;application/xml&#39;.
  *
  *       sendMMS({
  *           &quot;body&quot;:&quot;&lt;outboundMessageRequest&gt;&quot; + &quot;\n&quot; + &quot;&lt;address&gt;tel:xxxxxxxxxx&lt;/address&gt;&quot; + &quot;\n&quot; + &quot;&lt;subject&gt;Test MMS&lt;/subject&gt;&quot; + &quot;\n&quot; + &quot;&lt;priority&gt;High&lt;/priority&gt;&quot; + &quot;\n&quot; + &quot;&lt;/outboundMessageRequest&gt;&quot;,
  *           &quot;contentType&quot; : &quot;application/xml&quot;,
  *           &quot;accept&quot; : &quot;application/json&quot;,
- *           &quot;attachments&quot; : [{'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/png&quot;,'filePath' :&quot;Path of the file&quot;}, {'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/jpeg&quot;,'filePath' :&quot;Path of the file&quot;}]
+ *           &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
  *       }, function(data) {
  *
  *           //success Callback
@@ -305,13 +301,13 @@
  *
  *       });
  *
- * &lt;b&gt;3.&lt;/b&gt; The following example of the sendMMS method uses a contentType of 'application/x-www-form-urlencoded'.
+ * &lt;b&gt;3.&lt;/b&gt; The following example of the sendMMS method uses a contentType of &#39;application/x-www-form-urlencoded&#39;.
  *
  *       sendMMS({
  *           &quot;body&quot;:&quot;address=tel%3A%2B1xxxxxxxxxx&amp;priority=High&amp;subject=Test%20MMS&quot;,
  *           &quot;contentType&quot; : &quot;application/x-www-form-urlencoded&quot;,
  *           &quot;accept&quot; : &quot;application/json&quot;,
- *           &quot;attachments&quot; : [{'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/png&quot;,'filePath' :&quot;Path of the file&quot;}, {'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/jpeg&quot;,'filePath' :&quot;Path of the file&quot;}]
+ *           &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
  *       }, function(data) {
  *
  *           //success Callback
@@ -322,11 +318,11 @@
  *
  *       });
  *
-<span id='ATT-MMS-method-getMMSDeliveryStatus'> * &lt;i&gt;Note: xxxxxxxxxx represents an AT&amp;T wireless number.&lt;/i&gt;
-</span> */
+ * &lt;i&gt;Note: xxxxxxxxxx represents an AT&amp;T wireless number.&lt;/i&gt;
+ */
 
-/**
- * @method getMMSDeliveryStatus
+<span id='ATT-MMS-method-getMMSDeliveryStatus'>/**
+</span> * @method getMMSDeliveryStatus
  *
  * Returns the status of a sent MMS message.
  * @param {Object} options An object containing the following properties:
@@ -347,26 +343,26 @@
  * The following is an example of the getMMSDeliveryStatus method.
  *
  *      getMMSDeliveryStatus({
- *                  'id' : &quot;MMS ID that you get in response of sendMMS.&quot;,
+ *                  &#39;id&#39; : &quot;MMS ID that you get in response of sendMMS.&quot;,
  *                  &quot;accept&quot; : &quot;application/json&quot;,
  *       },  function(data) {
  *
  *            success Callback
  *
  *       }, function(error) {
-<span id='ATT-IMMN'> *
-</span> *            error Callback
+ *
+ *            error Callback
  *
  *       });
  */
-/**
- * @class ATT.IMMN &lt;b&gt;Introduction:&lt;/b&gt;
+<span id='ATT-IMMN'>/**
+</span> * @class ATT.IMMN &lt;b&gt;Introduction:&lt;/b&gt;
  *
  * The In-app Messaging from Mobile Number API enables your application to send and retrieve SMS and MMS messages on behalf of your customers’ regular AT&amp;T mobile phone numbers.
  *
  * &lt;b&gt;Description:&lt;/b&gt;
  *
- * The In-app Messaging from Mobile Number API allows applications to send and receive SMS and MMS on behalf of a subscriber if that subscriber has given consent. When sending a message on behalf of a subscriber, that subscriber's MSISDN is retrieved from the subscriber’s consent information. The message is then forwarded to the recipients using the subscriber's MSISDN as the sender address. A developer can make a single API request and the AT&amp;T system will determine if the request is an SMS or an MMS message and select the correct transport mechanism accordingly.
+ * The In-app Messaging from Mobile Number API allows applications to send and receive SMS and MMS on behalf of a subscriber if that subscriber has given consent. When sending a message on behalf of a subscriber, that subscriber&#39;s MSISDN is retrieved from the subscriber’s consent information. The message is then forwarded to the recipients using the subscriber&#39;s MSISDN as the sender address. A developer can make a single API request and the AT&amp;T system will determine if the request is an SMS or an MMS message and select the correct transport mechanism accordingly.
  * &lt;br&gt;Some major advantages of using In-app Messaging from Mobile Number are:
  * Sending messages from your application: The IMMN Send Message operation allows your customers to send text and picture messages to any U.S. mobile phone using their own AT&amp;T phone number, from within your application. Message recipients can immediately recognize who sent the message.
  * 
@@ -374,15 +370,15 @@
  *
  * &lt;b&gt;Methods:&lt;/b&gt;
  *
-<span id='ATT-IMMN-method-sendMessage'> * 1) getMessageContent
-</span> *
+ * 1) getMessageContent
+ *
  * 2) getMessageHeaders
  *
  * 3) sendMessage
  */
 
-/**
- * @method sendMessage
+<span id='ATT-IMMN-method-sendMessage'>/**
+</span> * @method sendMessage
  * Enables an application to send messages on behalf of an AT&amp;T subscriber. Each time the sendMessage method is invoked, a single message can be sent to one or more destination devices. Messages are processed synchronously and sent asynchronously to the destination.
  * @param {Object} options A JSON object containing the following properties:
  * @param {Object} options.body An object containing all of the parameters that a user needs to send a message on an AT&amp;T mobile device. Valid parameters are:
@@ -425,12 +421,12 @@
  *
  * &lt;strong&gt;Examples:&lt;/strong&gt;
  *
- * &lt;b&gt;1.&lt;/b&gt; The following example of the sendMessage method uses a contentType of 'application/json'.
+ * &lt;b&gt;1.&lt;/b&gt; The following example of the sendMessage method uses a contentType of &#39;application/json&#39;.
  *      sendMessage({
  *                   &quot;body&quot;:{ &quot;Addresses&quot;: [&quot;mail@mail.mail&quot;,&quot;mail@mail.mail&quot;,&quot;tel:xxxxxxxxxx&quot;], &quot;Text&quot;: &quot;Hello world&quot;, &quot;Subject&quot;: &quot;Hi&quot; },
  *                   &quot;contentType&quot; : &quot;application/json&quot;,
  *                   &quot;accept&quot; : &quot;application/json&quot;,
- *                   &quot;attachments&quot; : [{'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/png&quot;,'filePath' :&quot;Path of the file&quot;}, {'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/jpeg&quot;,'filePath' :&quot;Path of the file&quot;}]
+ *                   &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
  *        }, function(data) {
  *
  *           success Callback
@@ -441,12 +437,12 @@
  *
  *      });
  *
- * &lt;b&gt;2.&lt;/b&gt; The following example of the sendMessage method uses a contentType of 'application/xml'.
+ * &lt;b&gt;2.&lt;/b&gt; The following example of the sendMessage method uses a contentType of &#39;application/xml&#39;.
  *      sendMessage({
  *                    &quot;body&quot;:&quot;&lt;MessageRequest&gt;&quot;+&quot;\n&quot;+&quot;&lt;Addresses&gt;tel:xxxxxxxxxx,tel:xxxxxxxxxx,mail@mail.mail&lt;/Addresses&gt;&quot;+&quot;\n&quot;+&quot;&lt;Text&gt;Hello world&lt;/Text&gt;&quot;+&quot;\n&quot;+&quot;&lt;Subject&gt;Hi&lt;/Subject&gt;&quot;+&quot;\n&quot;+&quot;&lt;/MessageRequest&gt;&quot;,
  *                    &quot;contentType&quot; : &quot;application/xml&quot;,
  *                    &quot;accept&quot; : &quot;application/json&quot;,
- *                   &quot;attachments&quot; : [{'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/png&quot;,'filePath' :&quot;Path of the file&quot;}, {'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/jpeg&quot;,'filePath' :&quot;Path of the file&quot;}]
+ *                   &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
  *        }, function(data) {
  *
  *           success Callback
@@ -458,13 +454,13 @@
  *       });
  *
  *
- * &lt;b&gt;3.&lt;/b&gt; The following example of the sendMessage method uses a contentType of 'application/x-www-form-urlencoded'.
+ * &lt;b&gt;3.&lt;/b&gt; The following example of the sendMessage method uses a contentType of &#39;application/x-www-form-urlencoded&#39;.
  *
  *      sendMessage({
  *                   &quot;body&quot;:&quot;Addresses=tel%3A%2Bxxxxxxxxxx&amp;Addresses=tel%3A%2Bxxxxxxxxxx&amp;Addresses=mail@mail.mail&amp;Text=Hello&amp;Subject=Hi&quot;,
  *                   &quot;contentType&quot; : &quot;application/x-www-form-urlencoded&quot;,
  *                   &quot;accept&quot; : &quot;application/json&quot;,
- *                  &quot;attachments&quot; : [{'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/png&quot;,'filePath' :&quot;Path of the file&quot;}, {'fileName' : &quot;Name of the file&quot;,'fileType' : &quot;type of the file like : image/jpeg&quot;,'filePath' :&quot;Path of the file&quot;}]
+ *                  &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
  *        }, function(data) {
  *
  *           success Callback
@@ -473,13 +469,13 @@
  *
  *           error Callback
  *
-<span id='ATT-IMMN-method-getMessageHeaders'> *       });
-</span> *
+ *       });
+ *
  * &lt;i&gt;Note: xxxxxxxxxx represents an AT&amp;T wireless number&lt;/i&gt;
  */
 
-/**
- * @method getMessageHeaders
+<span id='ATT-IMMN-method-getMessageHeaders'>/**
+</span> * @method getMessageHeaders
  * Enables an application to retrieve meta-data for one or more Subscriber Messages from the AT&amp;T Messages environment.
  * @param {Object} options A JSON object containing the following properties:
  * @param {String} options.headerCount The number of Headers to be returned:
@@ -506,22 +502,22 @@
  * The following is an example of the getMessageHeaders method.
  *
  *          getMessageHeaders({
- *                  'accept' : 'application/json',
- *                  'headerCount' : 500 //Valid Range: Min = 1, Max = 500 // Should be integer
- *                  'indexCursor' : '123' //Define an index value at which HeaderCount will start.
+ *                  &#39;accept&#39; : &#39;application/json&#39;,
+ *                  &#39;headerCount&#39; : 500 //Valid Range: Min = 1, Max = 500 // Should be integer
+ *                  &#39;indexCursor&#39; : &#39;123&#39; //Define an index value at which HeaderCount will start.
  *           }, function(data) {
  *
  *               success Callback
  *
-<span id='ATT-IMMN-method-getMessageContent'> *           }, function(error) {
-</span> *
+ *           }, function(error) {
+ *
  *               error Callback
  *
  *           });
  */
 
-/**
- * @method getMessageContent
+<span id='ATT-IMMN-method-getMessageContent'>/**
+</span> * @method getMessageContent
  * Enables an application to retrieve media for one or more Subscriber Messages from the AT&amp;T Messages environment using information returned by the getMessageHeaders method.
  * @param {Object} options A JSON object containing the following properties:
  * @param {String} options.messageId A message identifier representing a Subscriber Message in the AT&amp;T Messages environment.
@@ -542,111 +538,35 @@
  * The following is an example of the getMessageContent method.
  *
  *      getMessageContent({
- *                  'messageId' : &quot;IMMN message ID that you get in response of sendMessage&quot;,
- *                  'partNumber' : '1'
+ *                  &#39;messageId&#39; : &quot;IMMN message ID that you get in response of sendMessage&quot;,
+ *                  &#39;partNumber&#39; : &#39;1&#39;
  *       }, function(data) {
  *
-<span id='ATT-Location'> *           success Callback
-</span> *
+ *           success Callback
+ *
  *       }, function(error) {
  *
  *           error Callback
  *
  *       });
  */
-/**
- * @class ATT.Location &lt;b&gt;Introduction:&lt;/b&gt;
- *
- * The Location API enables you to provide your customers with location aware applications that can be crucial to the service you offer. It provides an easy way to enhance a number of features. For instance, adding location awareness to your application allows you to engage customers by enriching social interactions, supporting location aware advertising, providing location aware search, and giving directions.
- *
- *&lt;b&gt;Description:&lt;/b&gt;
- *
-<span id='ATT-Location-method-getDeviceLocation'> * The Location API enables authorized applications to perform the following methods.
-</span> *
- *&lt;b&gt;Methods:&lt;/b&gt;
- *
- *1) getDeviceLocation
- */
-
-/**
- * @method getDeviceLocation
- * Returns the location information for a device.
- * @param {Object} options A JSON object containing the following properties:
- * @param {Number} [options.requestedAccuracy] Specifies the accuracy of the device location. The value of this parameter must be within the range of 0 to 20000 meters.
- *
- * This parameter value provides an indication to the API gateway as to which location technology should be used to find the location of the specified device.
- *
- *• 0 - 800  Assisted GPS (A-GPS)
- *
- *• 801-9999 Enhanced Cell-Id (ECID)
- *
- *• 10000 - 20000 Cell-Id (CID)
- * 
- * The default value is: 100
- *
- * @param {String} [options.tolerance] Specifies a tolerance value that defines the application's priority of response time versus accuracy. When this parameter is used, it must be present in the body as a query parameter.
- *
- *  Valid values are:
- *
- *• NoDelay - No compromise on the priority of the response time over accuracy
- *
- *• LowDelay – The response time could have a minimum delay for a better accuracy
- *
- *• DelayTolerant - Response time could be compromised to have high delay for better accuracy
- * 
- * The default value is: LowDelay
- *
- * @param {Number} [options.acceptableAccuracy] Specifies an acceptable limit of accuracy that combines with the value of the requestedAccuracy parameter. If the network is unable to return a response with an accuracy that is less than or greater than the value specified in the requestedAccuracy parameter by the amount specified in this parameter, the service error (SVC0200) will be returned indicating “Accuracy of location is not within acceptable limit”.
- * 
- * The default value is: 10000
- * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
- *
- *• application/json
- *
- *• application/xml
- * 
- * The default value is: application/json
- * @param {Function} success The callback function that is called when the method returns success.
- * @param {Function} error The callback function that is called when the method returns an error.
- * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request.
- *
- * &lt;strong&gt;Example:&lt;/strong&gt;
- *
- * The following is an example of the getDeviceLocation method.
- *
- *      getDeviceLocation({
- *           'requestedAccuracy' : xxxx,
- *           'tolerance' : 'xxxxxxxxx',
- *          'acceptableAccuracy' : xxxxx
- *      },function(data) {
- *
-<span id='ATT-OAuth'> *         success Callback
-</span> *
- *      }, function(error) {
- *
- *          error Callback
- *
- *      });
- *
- */
-
-/**
- * @class ATT.OAuth &lt;b&gt;Introduction:&lt;/b&gt;
+<span id='ATT-OAuth'>/**
+</span> * @class ATT.OAuth &lt;b&gt;Introduction:&lt;/b&gt;
  *
  * The AT&amp;T OAuth 2.0 Authentication Management service provides a safe and secure way for AT&amp;T subscribers to access AT&amp;T network resources through a third-party application without the risk of compromising security. The OAuth service ensures that secure, sensitive, and private AT&amp;T subscription related details are not exposed to the third-party application.
  *
  * OAuth authorization management is an open standard recognized as providing a strong protection to clients and applications. The OAuth service provides developers with a security model that allows them to obtain an authorization code and an access token. By acquiring an authorization code, a resource owner has authorized an application to access a protected resource on their behalf. The receipt of an access token enables an application to access a protected resource on behalf of a resource owner via the AT&amp;T network.
  *
-<span id='ATT-OAuth-method-obtainEndUserAuthorization'> * The AT&amp;T OAuth 2.0 Authentication Management service allows third party applications access to the private resources of subscribers without requiring the end-user to provide credentials (such as username and password) to the third party application. An application that is implemented with Oauth provides a closer and more secure integration with the AT&amp;T API Platform.
-</span> *
+ * The AT&amp;T OAuth 2.0 Authentication Management service allows third party applications access to the private resources of subscribers without requiring the end-user to provide credentials (such as username and password) to the third party application. An application that is implemented with Oauth provides a closer and more secure integration with the AT&amp;T API Platform.
+ *
  * &lt;b&gt;Methods:&lt;/b&gt;
  *
  * 1) authorize
  *
  * 2) obtainEndUserAuthorization
  */
-/**
- * @method obtainEndUserAuthorization
+<span id='ATT-OAuth-method-obtainEndUserAuthorization'>/**
+</span> * @method obtainEndUserAuthorization
  * The Obtain End-User Authorization operation is the initial operation in the OAuth call flow. It is invoked by an application that requires subscriber authorization in order to obtain an OAuth access token. The application request for an OAuth access token is forwarded by redirecting the subscriber’s browser to the API Gateway.
  *
  * &lt;b&gt;Important Note:&lt;/b&gt; Currently, this method call is only necessary and supported for applications attempting to consume the following APIs:
@@ -672,11 +592,11 @@
  * The following is an example of the obtainEndUserAuthorization method.
  *
  *      obtainEndUserAuthorization({
- *           'clientId' : 'API Key',
- *           'scope' : 'scope values',
- *          'redirectUrl' : 'redirect url'
-<span id='ATT-OAuth-method-authorize'> *      },function(data) {
-</span> *
+ *           &#39;clientId&#39; : &#39;API Key&#39;,
+ *           &#39;scope&#39; : &#39;scope values&#39;,
+ *          &#39;redirectUrl&#39; : &#39;redirect url&#39;
+ *      },function(data) {
+ *
  *         success Callback
  *
  *      }, function(error) {
@@ -686,12 +606,12 @@
  *      });
  */
 
-/**
- * @method authorize
+<span id='ATT-OAuth-method-authorize'>/**
+</span> * @method authorize
  *
  * Authorizes an application so that it can use specific AT&amp;T APIs.
  *
- * This method must be directly called using the ATT namespace as in the following example: &lt;b&gt;ATT.authorize('apiKey','secretKey','scope','grantType','oAuthCode')&lt;/b&gt;
+ * This method must be directly called using the ATT namespace as in the following example: &lt;b&gt;ATT.authorize(&#39;apiKey&#39;,&#39;secretKey&#39;,&#39;scope&#39;,&#39;grantType&#39;,&#39;oAuthCode&#39;)&lt;/b&gt;
  *
  * When authorizing an application for use with the Location and In-app Messaging from Mobile Number APIs, the user must send their access key, secret key, scope, grantType, and OAuthCode.
  *
@@ -702,21 +622,21 @@
  * @param {String} oAuthCode The authorization code. The oAuthCode is returned in the response value of the obtainEndUserAuthorization method. Currently, this parameter is only required when using the Location and IMMN APIs.
  *    &lt;b&gt;Example:&lt;/b&gt;
  *
-<span id='ATT-Speech'> * The following is an example of the authorize method.
-</span> *
- *              ATT.authorize('apiKey','secretKey','scope','grantType','oAuthCode');
+ * The following is an example of the authorize method.
+ *
+ *              ATT.authorize(&#39;apiKey&#39;,&#39;secretKey&#39;,&#39;scope&#39;,&#39;grantType&#39;,&#39;oAuthCode&#39;);
  */
 
 
-/**
- * @class ATT.Speech &lt;b&gt;Introduction:&lt;/b&gt;
+<span id='ATT-Speech'>/**
+</span> * @class ATT.Speech &lt;b&gt;Introduction:&lt;/b&gt;
  *
  * The Speech API enables authorized applications to transcribe speech (audio) to text. The developer can influence the results by passing a speech context in the request.
  *
  * &lt;b&gt;Description:&lt;/b&gt;
  *
-<span id='ATT-Speech-method-speechToText'> *The Speech API is a service that accepts audio data and returns the text representation of that audio. The text output can then be processed by different speech contexts to produce text results that represent that speech context. Each speech context is tuned to produce results more suitable for a given scenario.
-</span> *
+ *The Speech API is a service that accepts audio data and returns the text representation of that audio. The text output can then be processed by different speech contexts to produce text results that represent that speech context. Each speech context is tuned to produce results more suitable for a given scenario.
+ *
  * &lt;b&gt;Methods:&lt;/b&gt;
  *
  *1) speechToText
@@ -727,8 +647,8 @@
  *
  */
 
-/**
- * @method speechToText
+<span id='ATT-Speech-method-speechToText'>/**
+</span> * @method speechToText
  * Returns a text translation of the specified audio file using the specified speech context. The audio file must have one of the following sets of constraints: 16 bit PCM WAV, single channel, 8 kHz sampling, or AMR (narrowband), 12.2 kbit/s, 8 kHz sampling.
  *
  * @param {Object} options A JSON object containing the following properties:
@@ -805,13 +725,13 @@
  * The following is an example of the speechToText method.
  *
  *      speechToText({
- *          'filePath':'Path of audio file'//In android,Path should be like : /mnt/sdcard/.../example.wav.
- *          'xSpeechContext' : 'Generic',
- *          'contentType' : 'audio/wav',
- *          'contentLength' : length,//For IOS only.
- *          'accept':'application/json'
-<span id='ATT-Speech-method-speechToTextCustom'> *          'contentLanguage': 'es-US'
-</span> *      }, function(data) {
+ *          &#39;filePath&#39;:&#39;Path of audio file&#39;//In android,Path should be like : /mnt/sdcard/.../example.wav.
+ *          &#39;xSpeechContext&#39; : &#39;Generic&#39;,
+ *          &#39;contentType&#39; : &#39;audio/wav&#39;,
+ *          &#39;contentLength&#39; : length,//For IOS only.
+ *          &#39;accept&#39;:&#39;application/json&#39;
+ *          &#39;contentLanguage&#39;: &#39;es-US&#39;
+ *      }, function(data) {
  *
  *          //success Callback
  *
@@ -822,8 +742,8 @@
  *      });
  */
 
-/**
- * @method speechToTextCustom
+<span id='ATT-Speech-method-speechToTextCustom'>/**
+</span> * @method speechToTextCustom
  * This method returns a text translation of a specified audio file using a custom set of hints for pronunciation and grammar. The audio file must be created in one of the following formats:
  *
  *• 16-bit PCM WAV, single channel, 8 kHz sampling
@@ -847,13 +767,13 @@
  * @param {Boolean} [params.options.strict] If set to true, the response will strictly follow the passed in grammar rules
  * @param {Boolean} [params.options.chunked] If set to true, this will send the audio file to server using a chunked protocol.
  * 
-<span id='ATT-Speech-method-textToSpeech'> * @param {Function} success This method is called if data is successfully returned.  The first argument will be contain the response in JSON object defined by the &lt;a href=&quot;https://developer.att.com/developer/basicTemplate.jsp?passedItemId=13100102&amp;api=Speech&amp;version=3&quot;&gt;AT&amp;T Restful API&lt;/a&gt;.
-</span> * @param {Function} fail This method is called if an error occurs.
+ * @param {Function} success This method is called if data is successfully returned.  The first argument will be contain the response in JSON object defined by the &lt;a href=&quot;https://developer.att.com/developer/basicTemplate.jsp?passedItemId=13100102&amp;api=Speech&amp;version=3&quot;&gt;AT&amp;T Restful API&lt;/a&gt;.
+ * @param {Function} fail This method is called if an error occurs.
  * 
  */
  
-/**
- * @method textToSpeech
+<span id='ATT-Speech-method-textToSpeech'>/**
+</span> * @method textToSpeech
  * Returns an audio file in a particular voice and language for the text sent.
  * @param {Object} options Specifies a JSON object that contains properties for the following parameters:
  * @param {String} options.accept Specifies the audio file type that has to be generated. These are following audio types that can be requested for audio generation: audio/amr, audio/amr-wb and audio/x-wav.
@@ -909,8 +829,8 @@
  *		textToSpeech({
  *			&quot;accept&quot; :     &quot;audio/wav&quot;,
  *			&quot;contentType&quot;: &quot;text/plain&quot;,
-<span id='ATT-Notary'> *			&quot;body&quot;:        text,
-</span> *			&quot;filePath&quot;:    filePath,
+ *			&quot;body&quot;:        text,
+ *			&quot;filePath&quot;:    filePath,
  *			&quot;xArg&quot;:        &quot;VoiceName=crystal&quot;
  *
  *		}, function(data) {
@@ -921,15 +841,15 @@
  *       
  */
 
-/**
- * @class ATT.Notary &lt;b&gt;Introduction:&lt;/b&gt;
+<span id='ATT-Notary'>/**
+</span> * @class ATT.Notary &lt;b&gt;Introduction:&lt;/b&gt;
  *
  * The Notary Management API is used to digitally sign content or data The digital signing mechanism of the Notary Management API uses a token hash, a time stamp, and a nonce, to ensure that the sender of the data is who they say they are, and that the associated content indisputably came from the application that sent it and not from an imposter.
  *
  *&lt;b&gt;Description:&lt;/b&gt;
  *
-<span id='ATT-Notary-method-signedPayload'> * The Notary Management API is used to encode and sign documents in a secure and tamper resistant manner. This operation must be used to encode and secure the payment detail information when using the New Transaction and New Subscription methods of the Payment API.
-</span> *
+ * The Notary Management API is used to encode and sign documents in a secure and tamper resistant manner. This operation must be used to encode and secure the payment detail information when using the New Transaction and New Subscription methods of the Payment API.
+ *
  *&lt;b&gt;Usage:&lt;/b&gt;
  *
  * The signedPayload method must be used to generate the inputs for the Payment.newTransaction and Payment.newSubscription methods.
@@ -939,8 +859,8 @@
  *1) signedPayload
  */
 
-/**
- * @method signedPayload This API method treats the payload as an arbitrary set of text content. This method operation is used in conjunction with the Payment.newTransaction or Payment.newSubscription invocations of the AT&amp;T Payment API.
+<span id='ATT-Notary-method-signedPayload'>/**
+</span> * @method signedPayload This API method treats the payload as an arbitrary set of text content. This method operation is used in conjunction with the Payment.newTransaction or Payment.newSubscription invocations of the AT&amp;T Payment API.
  *
  *When calling the signedPayload method, your application is required to identify which of the standard HTTP content types (such as XML or JSON) is used to encode the document. Upon receipt of the payload body, the AT&amp;T API Gateway will repackage the content into a standard format before encoding and signing the payload for a response. After the AT&amp;T API unpacks and validates the payload content, any parameters associated with the payload are determined and the content is repackaged. The content type of the result is independent of the original content type as provided by the application.
  * @param {Object} options A JSON object containing the following properties:
@@ -984,7 +904,7 @@
  * The following is an example of the signedPayload method.
  *
  *       signedPayload({
- *            'data' : {&quot;Amount&quot; : &lt;value&gt;,
+ *            &#39;data&#39; : {&quot;Amount&quot; : &lt;value&gt;,
  *                      &quot;Category&quot; : &lt;value&gt;,
  *                      &quot;Channel&quot; : &lt;value&gt;,
  *                      &quot;Description&quot; : &lt;value&gt;,
@@ -996,9 +916,9 @@
  *                      &quot;SubscriptionRecurrences&quot; : &lt;value&gt;,
  *                      &quot;SubscriptionPeriod&quot; : &lt;value&gt;,
  *                      &quot;SubscriptionPeriodAmount&quot; : &lt;value&gt;},
- *            'clientId' : &lt;accessKey value&gt;,
-<span id='ATT-Payment'> *            'clientSecret' : &lt;secretKey value&gt;,
-</span> *            'contentType' : 'application/json'
+ *            &#39;clientId&#39; : &lt;accessKey value&gt;,
+ *            &#39;clientSecret&#39; : &lt;secretKey value&gt;,
+ *            &#39;contentType&#39; : &#39;application/json&#39;
  *      },function(data) {
  *
  *         success Callback
@@ -1010,8 +930,8 @@
  *      });
  */
 
-/**
- * @class ATT.Payment &lt;b&gt;Introduction:&lt;/b&gt;
+<span id='ATT-Payment'>/**
+</span> * @class ATT.Payment &lt;b&gt;Introduction:&lt;/b&gt;
  *
  * The Payment API provides developers and merchants the ability to charge digital services directly to an AT&amp;T subscriber bill for payment.
  *
@@ -1040,8 +960,8 @@
  * Use the getTransactionStatus or getSubscriptionStatus methods with the authorization code to get the transaction ID, which is needed for refunds.
  *
  *&lt;b&gt;Methods:&lt;/b&gt;
-<span id='ATT-Payment-method-newTransaction'> *
-</span> *1) acknowledgeNotification
+ *
+ *1) acknowledgeNotification
  *
  *2) getNotification
  *
@@ -1058,8 +978,8 @@
  *8) refundTransaction
  */
 
-/**
- * @method newTransaction Creates a new payment transaction for a one time product purchase (i.e. transactionType = SINGLE_PURCHASE).
+<span id='ATT-Payment-method-newTransaction'>/**
+</span> * @method newTransaction Creates a new payment transaction for a one time product purchase (i.e. transactionType = SINGLE_PURCHASE).
  *
  *Before this method can be invoked, the application must call Notary.signedPayload and provide a payload containing the parameters (i.e. name-value-pairs) necessary to complete the purchase process.
  *
@@ -1084,8 +1004,8 @@
  *
  *       newTransaction({
  *           &quot;signedDocument&quot; : &lt;value of SignedDocument returned by Notary.signedPayload&gt;,
-<span id='ATT-Payment-method-newSubscription'> *           &quot;signature&quot; : &lt;value of Signature returned by Notary.signedPayload&gt;,
-</span> *           &quot;clientId&quot; : &lt;accessKey value&gt;
+ *           &quot;signature&quot; : &lt;value of Signature returned by Notary.signedPayload&gt;,
+ *           &quot;clientId&quot; : &lt;accessKey value&gt;
  *      },function(data) {
  *
  *         success Callback
@@ -1097,8 +1017,8 @@
  *      });
  */
 
-/**
- * @method newSubscription The newSubscription method sets up recurring charges for a specified amount, at a specified interval, for a specified number of times.
+<span id='ATT-Payment-method-newSubscription'>/**
+</span> * @method newSubscription The newSubscription method sets up recurring charges for a specified amount, at a specified interval, for a specified number of times.
  *
  * The method authorizes both the merchant and the user of the subscription, and initializes the product and price data for of the transaction.
  *
@@ -1125,8 +1045,8 @@
  *
  *       newSubscription({
  *           &quot;signedDocument&quot; : &lt;Use value of SignedDocument returned by Notary.signedPayload&gt;,
-<span id='ATT-Payment-method-getTransactionStatus'> *           &quot;signature&quot; : &lt;Use value of Signature returned by Notary.signedPayload&gt;,
-</span> *           &quot;clientId&quot; : &lt;accessKey value&gt;
+ *           &quot;signature&quot; : &lt;Use value of Signature returned by Notary.signedPayload&gt;,
+ *           &quot;clientId&quot; : &lt;accessKey value&gt;
  *      },function(data) {
  *
  *         success Callback
@@ -1138,8 +1058,8 @@
  *      });
  */
 
-/**
- * @method getTransactionStatus Retrieves the status and all relevant information of a previously executed transaction.
+<span id='ATT-Payment-method-getTransactionStatus'>/**
+</span> * @method getTransactionStatus Retrieves the status and all relevant information of a previously executed transaction.
  *
  * Three different identifiers may be used:
  *
@@ -1181,15 +1101,15 @@
  *
  * Note: To get the transaction status, the user can pass any of the following IDs:
  *
-<span id='ATT-Payment-method-getSubscriptionStatus'> * 1)           &quot;transactionAuthCode&quot; : &quot;The value returned by AT&amp;T to the Developer’s Application Service upon successful conclusion of the Payment.newTransaction request&quot;
-</span> *
+ * 1)           &quot;transactionAuthCode&quot; : &quot;The value returned by AT&amp;T to the Developer’s Application Service upon successful conclusion of the Payment.newTransaction request&quot;
+ *
  * 2)           &quot;merchantTransactionId&quot; : &quot;The MerchantTransactionId specified in the initial call to the Notary.signedPayload&quot;
  *
  * 3)          &quot;transactionId&quot; : &quot; The TransactionId returned by a previous call to Get Transaction Status&quot;
  */
 
-/**
- * @method getSubscriptionStatus Retrieves the status of a previously executed call to the newSubscription method. The TransactionId from the previously executed newSubscription method call is used to retrieve the status of the subscription. This means that the TransactionIds from any new subscriptions must be stored in order to retrieve the status of those subscriptions. This method returns the status as well as several other fields related to the purchase.
+<span id='ATT-Payment-method-getSubscriptionStatus'>/**
+</span> * @method getSubscriptionStatus Retrieves the status of a previously executed call to the newSubscription method. The TransactionId from the previously executed newSubscription method call is used to retrieve the status of the subscription. This means that the TransactionIds from any new subscriptions must be stored in order to retrieve the status of those subscriptions. This method returns the status as well as several other fields related to the purchase.
  * @param {Object} options A JSON object containing the following properties:
  * @param {String} options.subscriptionId (Conditional Parameter) The value of this parameter is the subscription ID generated by AT&amp;T Payment processing system for a purchase. This value is used for future transaction requests.
  * @param {String} options.merchantTransactionId (Conditional Parameter) The value of this parameter is the transaction ID in the merchant’s system identifying the transaction. This ID must be unique on every purchase request.
@@ -1223,16 +1143,16 @@
  *
  * Note : To get the SubscriptionStatus,User can  pass any of the below mentioned ID :
  *
-<span id='ATT-Payment-method-refundTransaction'> * 1)           &quot;subscriptionAuthCode&quot; : &quot;The value returned by AT&amp;T to the Developer’s Application Service at upon successful conclusion of the Payment.newSubscription request&quot;
-</span> *
+ * 1)           &quot;subscriptionAuthCode&quot; : &quot;The value returned by AT&amp;T to the Developer’s Application Service at upon successful conclusion of the Payment.newSubscription request&quot;
+ *
  * 2)           &quot;merchantTransactionId&quot; : &quot;The MerchantTransactionId specified in the initial call to the Notary.signedPayload&quot;
  *
  * 3)          &quot;subscriptionId&quot; : &quot;The subscriptionId returned by a previous call to Get Subscription Status&quot;
  *
  */
 
-/**
- * @method refundTransaction Refunds the value of a transaction to the original consumer. The refundTransaction method can be invoked through the merchant application and will automatically pass without additional approvals.
+<span id='ATT-Payment-method-refundTransaction'>/**
+</span> * @method refundTransaction Refunds the value of a transaction to the original consumer. The refundTransaction method can be invoked through the merchant application and will automatically pass without additional approvals.
  *
  * There are specific limits configured on the number of refunds within a day, week, and month. These limits are configured for a merchant account in the AT&amp;T payment system.
  * @param {Object} options A JSON object containing the following properties:
@@ -1256,12 +1176,12 @@
  *
  *  &lt;strong&gt;Examples:&lt;/strong&gt;
  *
- * &lt;b&gt;1.&lt;/b&gt; The following example of the refundTransaction method uses a contentType of 'application/json'.
+ * &lt;b&gt;1.&lt;/b&gt; The following example of the refundTransaction method uses a contentType of &#39;application/json&#39;.
  *      refundTransaction({
  *                   &quot;body&quot;:{&quot;TransactionOperationStatus&quot;:&lt;value&gt;, &quot;RefundReasonCode&quot;:value, &quot;RefundReasonText&quot;:&lt;value&gt;},
  *                   &quot;contentType&quot; : &quot;application/json&quot;,
- *                   'transactionId' : TransactionId returned by a call to getTransactionStatus,
- *                   'action' : &lt;action value&gt;
+ *                   &#39;transactionId&#39; : TransactionId returned by a call to getTransactionStatus,
+ *                   &#39;action&#39; : &lt;action value&gt;
  *       }, function(data) {
  *
  *           success Callback
@@ -1272,12 +1192,12 @@
  *
  *      });
  *
- * &lt;b&gt;2.&lt;/b&gt; The following example of the refundTransaction method uses a contentType of 'application/xml'.
+ * &lt;b&gt;2.&lt;/b&gt; The following example of the refundTransaction method uses a contentType of &#39;application/xml&#39;.
  *      refundTransaction({
  *                    &quot;body&quot;:&quot;&lt;RefundTransactionRequest&gt;&lt;TransactionOperationStatus&gt;value&lt;/TransactionOperationStatus&gt;&lt;RefundReasonCode&gt;value&lt;/RefundReasonCode&gt; &lt;RefundReasonText&gt;value&lt;/RefundReasonText&gt;&lt;/RefundTransactionRequest&gt;&quot;,
  *                    &quot;contentType&quot; : &quot;application/xml&quot;,
-<span id='ATT-Payment-method-getSubscriptionDetails'> *                    'transactionId' : TransactionId returned by a call to getTransactionStatus,
-</span> *                    'action' : &lt;action value&gt;
+ *                    &#39;transactionId&#39; : TransactionId returned by a call to getTransactionStatus,
+ *                    &#39;action&#39; : &lt;action value&gt;
  *       }, function(data) {
  *
  *           success Callback
@@ -1290,8 +1210,8 @@
  *
  */
 
-/**
- * @method getSubscriptionDetails Retrieves the details for a merchant subscription to which a consumer has subscribed. Merchants who manage consumers can use this method to determine the details of a subscription for a particular consumer.
+<span id='ATT-Payment-method-getSubscriptionDetails'>/**
+</span> * @method getSubscriptionDetails Retrieves the details for a merchant subscription to which a consumer has subscribed. Merchants who manage consumers can use this method to determine the details of a subscription for a particular consumer.
  * @param {Object} options A JSON object containing the following properties:
  * @param {String} options.consumerId Identifies the consumer that is to use the subscription. The ConsumerId is a unique user id generated in the payment system representing a unique subscriber.
  * @param {String} options.merchantSubscriptionId Identifies the merchant’s subscription. This must be a unique value for each merchant subscription.
@@ -1310,8 +1230,8 @@
  *
  * The following is an example of the getSubscriptionDetails method.
  *       getSubscriptionDetails({
-<span id='ATT-Payment-method-getNotification'> *           'consumerId' : &lt;returns in response of Payment.getSubscriptionStatus&gt;,
-</span> *           'merchantSubscriptionId' : &lt;returns in response of Payment.getSubscriptionStatus&gt;,
+ *           &#39;consumerId&#39; : &lt;returns in response of Payment.getSubscriptionStatus&gt;,
+ *           &#39;merchantSubscriptionId&#39; : &lt;returns in response of Payment.getSubscriptionStatus&gt;,
  *      },function(data) {
  *
  *         success Callback
@@ -1323,8 +1243,8 @@
  *      });
  */
 
-/**
- * @method getNotification Retrieves a notification object that has been received in a prior notification message as a result of having the server listening for notification messages.
+<span id='ATT-Payment-method-getNotification'>/**
+</span> * @method getNotification Retrieves a notification object that has been received in a prior notification message as a result of having the server listening for notification messages.
  * @param {Object} options A JSON object containing the following properties:
  * @param {String} options.notificationId The ID of the notification to be retrieved.
  * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
@@ -1340,10 +1260,10 @@
  *
  *  &lt;b&gt;Example:&lt;/b&gt;
  * 
-<span id='ATT-Payment-method-acknowledgeNotification'> * The following is an example of the getNotification method.
-</span> *
+ * The following is an example of the getNotification method.
+ *
  *       getNotification({
- *           'notificationId' : 'ID of the notification that to be retrieved.'
+ *           &#39;notificationId&#39; : &#39;ID of the notification that to be retrieved.&#39;
  *      },function(data) {
  *
  *         success Callback
@@ -1355,8 +1275,8 @@
  *      });
  */
 
-/**
- * @method acknowledgeNotification Acknowledges the receipt of a notification and requests that further notifications be stopped for a particular NotificationID.
+<span id='ATT-Payment-method-acknowledgeNotification'>/**
+</span> * @method acknowledgeNotification Acknowledges the receipt of a notification and requests that further notifications be stopped for a particular NotificationID.
  * @param {Object} options A JSON object containing the following properties:
  * @param {String} options.notificationId The ID of the notification to be retrieved.
  * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
@@ -1372,10 +1292,10 @@
  *
  *  &lt;b&gt;Example:&lt;/b&gt;
  *
-<span id='ATT-CallManagement'> * The following is an example of the acknowleadgeNotification method.
-</span> *
+ * The following is an example of the acknowleadgeNotification method.
+ *
  *       acknowleadgeNotification({
- *           'notificationId' : 'ID of the notification that to be retrieved.'
+ *           &#39;notificationId&#39; : &#39;ID of the notification that to be retrieved.&#39;
  *      },function(data) {
  *
  *         success Callback
@@ -1385,191 +1305,6 @@
  *          error Callback
  *
  *      });
- */
-
-
-/**
- * @class ATT.CallManagement &lt;b&gt;Introduction&lt;/b&gt;
- *
- * The Call Management API exposes SMS and Voice Calling APIs, which enable app developers to create voice-enabled apps that send or receive calls, provide Interactive Voice Response (IVR) logic, Automatic Speech Recognition (ASR), Voice to Text (VTT), Text (SMS) integration, and more.
- *
- * &lt;b&gt;Description&lt;/b&gt;
- *
- * The Call Management API provides app provisioning, or operations to support the creation of outgoing call sessions and sending of signals to existing sessions. Incoming calls sessions are created automatically in the call environment.
- * 
-<span id='ATT-CallManagement-method-createSession'> * If your application hosts a service that complies with an AT&amp;T specified callback, the application may also receive MMS messages. AT&amp;T will deliver MMS messages to the application as soon as they arrive on the AT&amp;T network.
-</span> *
- * &lt;b&gt;The Call Management API provides the following methods:&lt;/b&gt;
- *
- *• createSession
- *
- *• sendSignal
- *
- */
-
-/**
- * @method createSession
- *
- * Creates a new outbound voice or SMS session.
- *
- * @param {Object} options A JSON object containing the following properties:
- * @param {Object} options.body An object containing all of the parameters that a user needs for call management. Valid parameters are:
- * @param {String} options.body.numberToDial The MSISDN of the recipient(s).For multiple addresses, the value of this parameter will be an array of string.
- * @param {String} options.body.feature The type of feature for Call Management.
- * @param {String} options.body.messageText The text of the message to send.
- * 
- * @param {String} options.contentType Specifies the format of the message content. Valid values are:
- *
- *• application/json
- *
- *• application/xml
- *
- *• application/x-www-form-urlencoded
-
- * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
- *
- *• application/json
- *
- *• application/xml
- * The default value is: application/json
- * @param {Function} success The callback function that is called when the method returns success.
- * @param {Function} error The callback function that is called when the method returns an error.
- * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. This response object contains the Call Management ID that is used in the ID property of the options parameter in the sendSignal method.
- *
- * &lt;strong&gt;Examples:&lt;/strong&gt;
- *
- * &lt;b&gt;Example 1: &lt;/b&gt; The following example of the createSession method uses a contentType of 'application/json'.
- *
- *      createSession({
- *                  &quot;body&quot;:{ &quot;numberToDial&quot; : &quot;xxxxxxxxxx,xxxxxxxxxx&quot;, &quot;Subject&quot; : &quot;Test Broadcast Message&quot;, &quot;feature&quot; : &quot;broadcastMsg&quot; },
- *                  &quot;contentType&quot; : &quot;application/json&quot;,
- *                  &quot;accept&quot; : &quot;application/json&quot;
- *      },  function(data) {
- *
- *           success Callback
- *
- *       }, function(error) {
- *
- *           error Callback
- *
- *       });
- * 
- * &lt;i&gt;Note: xxxxxxxxxx represents valid wireless number.&lt;/i&gt;
- *
- * &lt;b&gt;Example 2.&lt;/b&gt; The following example of the createSession method uses a contentType of 'application/xml'.
- *
- *      createSession({
- *                  &quot;body&quot;:{ &quot;numberToDial&quot; : &quot;xxxxxxxxxx,xxxxxxxxxx&quot;, &quot;Subject&quot; : &quot;Test Broadcast Message&quot;, &quot;feature&quot; : &quot;broadcastMsg&quot; },
- *                  &quot;contentType&quot; : &quot;application/xml&quot;,
- *                  &quot;accept&quot; : &quot;application/json&quot;
- *       },  function(data) {
- *
- *           success Callback
- *
- *       }, function(error) {
- *
- *           error Callback
- *
- *       });
- * 
- * &lt;i&gt;Note: xxxxxxxxxx represents valid wireless number.&lt;/i&gt;
- *
- * &lt;b&gt;Example 3.&lt;/b&gt; The following example of the createSession method uses a contentType of 'application/x-www-form-urlencoded'.
- *
- *      createSession({
- *                  &quot;body&quot;:&quot;numberToDial=xxxxxxxxxx&amp;Subject=broadcastMsg&amp;Subject=Test%20Broadcast&quot;,
-<span id='ATT-CallManagement-method-sendSignal'> *                  &quot;contentType&quot; : &quot;application/x-www-form-urlencoded&quot;,
-</span> *                  &quot;accept&quot; : &quot;application/json&quot;
- *      },  function(data) {
- *
- *          success Callback
- *
- *      }, function(error) {
- *
- *          error Callback
- *
- *      });
- *
- * &lt;i&gt;Note: xxxxxxxxxx represents valid wireless number.&lt;/i&gt;
- */
-
-/**
- * @method sendSignal sends a signal to voice or SMS session.
- *
- * @param {Object} options A JSON object containing the following properties:
- * @param {String} options.cmsId Specifies the session ID that is returned by the createSession method.
- * @param {Object} options.body An object containing all of the parameters that a user needs to send signal. Valid parameters are:
- * @param {String} options.body.signal The type of signal that needs to send.
- * 
- * @param {String} options.contentType Specifies the format of the message content. Valid values are:
- *
- *• application/json
- *
- *• application/xml
- *
- *• application/x-www-form-urlencoded
-
- * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
- *
- *• application/json
- *
- *• application/xml
- * The default value is: application/json
- * @param {Function} success The callback function that is called when the method returns success.
- * @param {Function} error The callback function that is called when the method returns an error.
- * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. This response object contains the Call Management ID that is used in the id property of the options parameter in the sendSignal method.
- *
- * &lt;strong&gt;Example 1.&lt;/strong&gt;
- *
- * The following example of the sendSignal method uses a contentType of 'application/json'.
- *
- *      sendSignal({
- *                  &quot;body&quot;:{ &quot;signal&quot; : &quot;exit&quot; },
- *                  &quot;contentType&quot; : &quot;application/json&quot;,
- *                  &quot;accept&quot; : &quot;application/json&quot;
- *       },  function(data) {
- *
- *            success Callback
- *
- *       }, function(error) {
- *
- *            error Callback
- *
- *       });
- * 
- * &lt;b&gt;Example 2.&lt;/b&gt; The following example of the sendSignal method uses a contentType of 'application/xml'.
- *
- *      sendSignal({
- *                  &quot;body&quot;:{ &quot;signal&quot; : &quot;exit&quot; },
- *                  &quot;contentType&quot; : &quot;application/xml&quot;,
- *                  &quot;accept&quot; : &quot;application/json&quot;
- *       },  function(data) {
- *
- *           success Callback
- *
- *       }, function(error) {
- *
- *           error Callback
- *
- *       });
- * 
- *
- * &lt;b&gt;Example 3.&lt;/b&gt; The following example of the sendSignal method uses a contentType of 'application/x-www-form-urlencoded'.
- *
- *      sendSignal({
- *                  &quot;body&quot;:&quot;signal=exit&quot;,
- *                  &quot;contentType&quot; : &quot;application/x-www-form-urlencoded&quot;,
- *                  &quot;accept&quot; : &quot;application/json&quot;
- *      },  function(data) {
- *
- *          success Callback
- *
- *      }, function(error) {
- *
- *          error Callback
- *
- *      });
- *
  */
 </pre>
 </body>
