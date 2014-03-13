@@ -1,5 +1,5 @@
 var mainWindow = Ti.UI.currentWindow;
-
+var util = require('util');
 var btnTransacrtion = Ti.UI.createButton({
 	title : 'Single Pay',
 	top : Ti.UI.Android ? "10dp" : 10,
@@ -17,32 +17,12 @@ mainWindow.add(btnSubscription);
 
 btnTransacrtion.addEventListener('click', function(e) {
 	Ti.API.info('Single Pay Button Clicked.');
-	openWindow("paymenttransaction.js", "Single Pay");
+	var  transactionWindow = util.makeWindow("paymenttransaction.js","Single Pay");
+	transactionWindow.open();
 });
 
 btnSubscription.addEventListener('click', function(e) {
 	Ti.API.info('Subscription Button Clicked.');
-	openWindow("paymentsubscription.js", "Subscription");
+	var  subscriptionWindow = util.makeWindow("paymentsubscription.js","Subscription");
+	subscriptionWindow.open();
 });
-
-function openWindow(url, title) {
-	var win = Ti.UI.createWindow({
-		url : url,
-		backgroundColor : 'white',
-		modal : true,
-		title : title
-	});
-if (Titanium.Platform.osname !== "android") {
-	var winNav = Ti.UI.iOS.createNavigationWindow({
-	    modal: true,
-		window: win
-	});
-}
-	if (Titanium.Platform.osname !== "android") {
-		winNav.open();
-	}
-	else {
-		win.open();
-	}
-}
-

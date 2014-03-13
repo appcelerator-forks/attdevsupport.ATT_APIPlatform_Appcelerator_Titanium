@@ -395,6 +395,7 @@ function createGetFilePathWindow(folderPath, filePathCB, errorCB) {
 	    });
 	}
 
+
     function close() {
         if (Titanium.Platform.osname !== "android") {
 			modalNav.close();
@@ -431,6 +432,41 @@ function createGetFilePathWindow(folderPath, filePathCB, errorCB) {
 }
 
 
+//Create new window
+
+	function makeWindow(url, title) {
+		var mainWinClose = Ti.UI.createButton({
+			style : Ti.UI.iPhone.SystemButtonStyle.DONE,
+			title : 'close'
+		});
+
+		var win = Ti.UI.createWindow({
+			url : url,
+			backgroundColor : 'white',
+			modal : true,
+			title : title,
+			rightNavButton : mainWinClose
+		});
+		if (Titanium.Platform.osname !== "android") {
+			var winNav = Ti.UI.iOS.createNavigationWindow({
+				modal : true,
+				window : win
+			});
+		}
+		win.addEventListener('android:back', function(e) {
+			win.close();
+		});
+		mainWinClose.addEventListener('click', function() {
+			winNav.close();
+		});
+		if (Titanium.Platform.osname !== "android") {
+			return winNav;
+		}
+		else {
+			return win;
+		}
+	}
+
 
 //Helper functions
 exports.forEach = forEach;
@@ -438,6 +474,7 @@ exports.copyObjTo = copyObjTo;
 exports.isDirectory = isDirectory;
 exports.formatFilePath = formatFilePath;
 exports.formatNumberStr = formatNumberStr;
+exports.makeWindow = makeWindow;
 
 //Common values
 exports.state = state;

@@ -176,10 +176,10 @@ var deleteNotificationFromXml = function() {
 		});
 	}
 };
-rightNavButton.addEventListener('click', function() {"use strict";
+/*rightNavButton.addEventListener('click', function() {"use strict";
 	deleteNotificationFromXml();
 	currentWindow.close();
-});
+});*/
 
 currentWindow.addEventListener('android:back', function(e) {
 	'use strict';
@@ -187,12 +187,12 @@ currentWindow.addEventListener('android:back', function(e) {
 	currentWindow.close();
 });
 if (Titanium.Platform.osname !== "android") {
-	currentWindow.setRightNavButton(rightNavButton);
+	//currentWindow.setRightNavButton(rightNavButton);
 }
 
 callExternalUrl(notificationUrl, {
 	"RequestType" : "GET",
-	"NotificationType" : currentWindow.type
+	"NotificationType" : currentWindow.title
 });
 
 transactionTable.addEventListener('click', function(e) {

@@ -1,6 +1,6 @@
 //Att common JS module needs to be required.
 var attAPIs = require('att');
-
+var util = require('util');
 //Note: Application Developer should get access key and secret key by registering on www.developer.att.com website
 //and creating sample Application.
 
@@ -16,10 +16,6 @@ attAPIs.ATT.authorize(accessKey, secretKey, scope, grantType);
 var webview = null;
 
 var mainWindow = Ti.UI.currentWindow;
-
-mainWindow.addEventListener('android:back', function(e) {
-	mainWindow.close();
-});
 
 var responseWindow = Ti.UI.createWindow({
 	modal : true,
@@ -47,11 +43,6 @@ var responseWinRightNavButton = Ti.UI.createButton({
 	title : 'close'
 });
 
-var mainWinClose = Ti.UI.createButton({
-	style : Ti.UI.iPhone.SystemButtonStyle.DONE,
-	title : 'close'
-});
-
 responseWinRightNavButton.addEventListener('click', function() {"use strict";
 	if (webview !== null) {
 		responseWindow.remove(webview);
@@ -59,14 +50,10 @@ responseWinRightNavButton.addEventListener('click', function() {"use strict";
 	}
 	responseNav.close();
 });
-mainWinClose.addEventListener('click', function() {"use strict";
-	mainWindow.close();
-});
 
 // //For Iphone Only.
 if (Titanium.Platform.osname !== "android") {
 	responseWindow.setRightNavButton(responseWinRightNavButton);
-	mainWindow.setRightNavButton(mainWinClose);
 }
 
 var responseLable = Ti.UI.createLabel({
@@ -313,7 +300,9 @@ getTransactionStatus.addEventListener('click', function() {
 
 getNotification.addEventListener('click', function() {
 	Ti.API.info('Get Notification Button Clicked.');
-	var win = Ti.UI.createWindow({
+	var notificationWin = util.makeWindow("notificationUI.js","Notification");
+	notificationWin.open();
+/*	var win = Ti.UI.createWindow({
 		url : 'notificationUI.js',
 		backgroundColor : 'white',
 		modal : true,
@@ -321,5 +310,5 @@ getNotification.addEventListener('click', function() {
 	});
 	
 	win.open();
+	*/
 });
-
