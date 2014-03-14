@@ -291,8 +291,8 @@ function sendMessage()
 	var args = {
 		"body" : {
 			"Addresses" : AddString,
-			"Text" : textSubject.value,
-			"Subject" : text.value
+			"Text" : text.value,
+			"Subject" : textSubject.value
 		},
 		"contentType" : "application/json",
 		"accept" : "application/json",
