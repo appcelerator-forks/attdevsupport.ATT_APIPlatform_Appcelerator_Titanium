@@ -60,9 +60,5 @@
     <property name="description">Purchase</property>
     <property name="paymentServerUrl">http://attdemo.somee.com/ATTNotifications/</property>
     <property name="redirectUrl">http://attdemo.somee.com/AttNotifications/SuccessfulAuthentication.html</property>
-    <modules>
-        <module platform="commonjs">att</module>
-        <module platform="android">ti.api.att</module>
-        <module platform="iphone">ti.api.att</module>
-    </modules>
+    <modules/>
 </ti:app>
