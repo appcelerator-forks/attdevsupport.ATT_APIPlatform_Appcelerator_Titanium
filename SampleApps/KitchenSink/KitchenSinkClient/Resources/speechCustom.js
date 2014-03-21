@@ -135,6 +135,14 @@ if (!deviceState.is.android) {
             title : "Recorder Screen",
             backgroundColor : '#fff'
         });
+	    
+	     if (Titanium.Platform.osname !== "android") {    
+		    var winNav = Ti.UI.iOS.createNavigationWindow({
+		    modal: true,
+		    window: win
+		    });
+		 }
+		 
         var recorderClose = Ti.UI.createButton({
             style : Ti.UI.iPhone.SystemButtonStyle.DONE,
             title : 'close'
@@ -142,11 +150,16 @@ if (!deviceState.is.android) {
         
         recorderClose.addEventListener('click', function() {
             Ti.API.info('Recording Screen Closed.');
-            win.close();
+            winNav.close();
         });
         
         win.setRightNavButton(recorderClose);
-        win.open();
+        if (Titanium.Platform.osname !== "android") {
+			winNav.open();
+		}
+		else {
+			win.open();
+		}
     });
     scrollView.add(recorder);
 }

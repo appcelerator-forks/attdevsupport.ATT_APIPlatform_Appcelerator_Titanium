@@ -20,6 +20,12 @@ var responseWindow = Ti.UI.createWindow({
 	backgroundColor : 'white',
 	title : 'Response'
 });
+if (Titanium.Platform.osname !== "android") {
+	var responseNav = Ti.UI.iOS.createNavigationWindow({
+	    modal: true,
+		window: responseWindow
+	});
+}
 
 responseWindow.addEventListener('android:back', function(e) {
 	'use strict';
@@ -32,7 +38,7 @@ var responseWinRightNavButton = Ti.UI.createButton({
 });
 
 responseWinRightNavButton.addEventListener('click', function() {"use strict";
-	responseWindow.close();
+	responseNav.close();
 });
 // //For Iphone Only.
 if (Titanium.Platform.osname !== "android") {
@@ -56,7 +62,12 @@ function openPopUp(data) {
 	'use strict';
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseWindow.open();
+	if (Titanium.Platform.osname !== "android") {
+		responseNav.open();
+	}
+	else {
+		responseWindow.open();
+	}
 }
 
 var rightNavButton = Ti.UI.createButton({
@@ -165,10 +176,10 @@ var deleteNotificationFromXml = function() {
 		});
 	}
 };
-rightNavButton.addEventListener('click', function() {"use strict";
+/*rightNavButton.addEventListener('click', function() {"use strict";
 	deleteNotificationFromXml();
 	currentWindow.close();
-});
+});*/
 
 currentWindow.addEventListener('android:back', function(e) {
 	'use strict';
@@ -176,12 +187,12 @@ currentWindow.addEventListener('android:back', function(e) {
 	currentWindow.close();
 });
 if (Titanium.Platform.osname !== "android") {
-	currentWindow.setRightNavButton(rightNavButton);
+	//currentWindow.setRightNavButton(rightNavButton);
 }
 
 callExternalUrl(notificationUrl, {
 	"RequestType" : "GET",
-	"NotificationType" : currentWindow.type
+	"NotificationType" : currentWindow.title
 });
 
 transactionTable.addEventListener('click', function(e) {

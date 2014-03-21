@@ -28,6 +28,12 @@ var responseWindow = Ti.UI.createWindow({
 	title : 'Response'
 });
 
+if (Titanium.Platform.osname !== "android") {
+	var responseNav = Ti.UI.iOS.createNavigationWindow({
+	    modal: true,
+		window: responseWindow
+	});
+}
 responseWindow.addEventListener('android:back', function(e) {'use strict';
 	responseWindow.close();
 });
@@ -38,8 +44,9 @@ var responseWinRightNavButton = Ti.UI.createButton({
 });
 
 responseWinRightNavButton.addEventListener('click', function() {"use strict";
-	responseWindow.close();
+	responseNav.close();
 });
+
 // //For Iphone Only.
 if (Titanium.Platform.osname !== "android") {
 	responseWindow.setRightNavButton(responseWinRightNavButton);
@@ -61,7 +68,12 @@ responseWindow.add(responseView);
 function openPopUp(data) {'use strict';
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseWindow.open();
+	if (Titanium.Platform.osname !== "android") {
+		responseNav.open();
+	}
+	else {
+		responseWindow.open();
+	}
 }
 
 
@@ -96,22 +108,22 @@ var text = Ti.UI.createTextField({
 var GetAttachment = Ti.UI.createButton({
 	title : 'Attachment',
 	top : Ti.UI.Android ? "300dp" : 260,
-	height : Ti.UI.Android ? "30dp" : 30
+	height : Ti.UI.Android ? "35dp" : 30
 });
 var immnSendMessageButton = Ti.UI.createButton({
 	title : 'Send Message',
 	top : Ti.UI.Android ? "340dp" : 300,
-	height : Ti.UI.Android ? "30dp" : 30
+	height : Ti.UI.Android ? "35dp" : 30
 });
 var GetimmnMessageHeaderBtn = Ti.UI.createButton({
 	title : 'Get Message Headers',
 	top : Ti.UI.Android ? "380dp" : 340,
-	height : Ti.UI.Android ? "30dp" : 30
+	height : Ti.UI.Android ? "35dp" : 30
 });
 var GetimmnMessageContentBtn = Ti.UI.createButton({
 	title : 'Get Message Content',
 	top : Ti.UI.Android ? "420dp" : 380,
-	height : Ti.UI.Android ? "30dp" : 30
+	height : Ti.UI.Android ? "35dp" : 30
 });
 var dispAttachment = Ti.UI.createScrollView({
 	top : 170,
@@ -279,8 +291,8 @@ function sendMessage()
 	var args = {
 		"body" : {
 			"Addresses" : AddString,
-			"Text" : textSubject.value,
-			"Subject" : text.value
+			"Text" : text.value,
+			"Subject" : textSubject.value
 		},
 		"contentType" : "application/json",
 		"accept" : "application/json",
@@ -294,7 +306,12 @@ function sendMessage()
 		} else {
 			responseLable.text = 'RESPONSE :' + data;
 		}
+		if (Titanium.Platform.osname !== "android") {
+		responseNav.open();
+		}
+		else {
 		responseWindow.open();
+		}
 		
 		for(cnt=(dispAttachment.children.length-1);cnt>=0;cnt--){
 			dispAttachment.remove(dispAttachment.children[cnt]);
@@ -329,7 +346,12 @@ function getMessageHeaders()
 		
 		responseLable.text = null;
 		responseLable.text = 'RESPONSE :' + data;
+		if (Titanium.Platform.osname !== "android") {
+		responseNav.open();
+		}
+		else {
 		responseWindow.open();
+		}
 		
 	}, function(error) {
 		Ti.API.error('Error Callback:' + JSON.stringify(error));
@@ -360,7 +382,12 @@ function getMessageContent()
 		    text += '\nData: ' + data;
 		}
 		responseLable.text = text;
+		if (Titanium.Platform.osname !== "android") {
+		responseNav.open();
+		}
+		else {
 		responseWindow.open();
+		}
 	}, function(error) {
 		Ti.API.error('Error Callback:' + JSON.stringify(error));
 		openPopUp(JSON.stringify(error));

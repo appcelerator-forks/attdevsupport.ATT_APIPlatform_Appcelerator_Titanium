@@ -109,7 +109,12 @@ if(state.device.is.android) {
         
         picker.add([selectedView, selectedButton]);
         picker.addEventListener('click', function(e) {
-            popupWindow.open();
+            if (Titanium.Platform.osname !== "android") {
+				popupNav.open();
+			}
+			else {
+				popupWindow.open();
+			}
         });
         
         picker.setValue = function(val) {
@@ -138,13 +143,25 @@ if(state.device.is.android) {
             title : 'Data Window'
         });
         
+        if (Titanium.Platform.osname !== "android") {
+	        var popupNav = Ti.UI.iOS.createNavigationWindow({
+	        modal: true,
+	        window: popupWindow
+	        });
+	    }
+        
         //Add Complete button
         var modalWinRightNavButton = Ti.UI.createButton({
             style : Ti.UI.iPhone.SystemButtonStyle.DONE,
             title : 'Done'
         });
         modalWinRightNavButton.addEventListener('click', function() {
-            popupWindow.close();
+        if (Titanium.Platform.osname !== "android") {
+			popupNav.close();
+		}
+		else {
+			popupWindow.close();
+		}
         });
         popupWindow.setRightNavButton(modalWinRightNavButton);
         
@@ -208,7 +225,12 @@ function createResponseWindow() {
         backgroundColor : 'white',
         title : 'Response'
     });
-    
+if (Titanium.Platform.osname !== "android") {
+var responseNav = Ti.UI.iOS.createNavigationWindow({
+    modal: true,
+    window: responseWindow
+    }); 
+ }
     responseWindow.addEventListener('android:back', function(e) {
         responseWindow.close();
     });
@@ -221,7 +243,7 @@ function createResponseWindow() {
         });
         
         responseWinRightNavButton.addEventListener('click', function() {
-            responseWindow.close();
+            responseNav.close();
         });
         
         responseWindow.setRightNavButton(responseWinRightNavButton);
@@ -249,7 +271,12 @@ function createResponseWindow() {
         responseStr += ': ' + ((typeof data === 'string') ? data : JSON.stringify(data, null, 3));
         
         responseLabel.text = responseStr;
-        responseWindow.open();
+        if (Titanium.Platform.osname !== "android") {
+			responseNav.open();
+		}
+		else {
+			responseWindow.open();
+		}
     };
 }
 
@@ -361,8 +388,21 @@ function createGetFilePathWindow(folderPath, filePathCB, errorCB) {
         backgroundColor : 'white'
     });
     
+    if (Titanium.Platform.osname !== "android") {
+	    var modalNav = Ti.UI.iOS.createNavigationWindow({
+	    modal: true,
+	    window: modalWindow
+	    });
+	}
+
+
     function close() {
-        modalWindow.close();
+        if (Titanium.Platform.osname !== "android") {
+			modalNav.close();
+		}
+		else {
+			modalWindow.close();
+		}
         if(selectedRow) {
             var file = selectedRow.file || Ti.Filesystem.getFile(folderPath, selectedRow.title);
             
@@ -383,9 +423,49 @@ function createGetFilePathWindow(folderPath, filePathCB, errorCB) {
     
     modalWindow.addEventListener('android:back', close);
     modalWindow.add(fileBrowserTable);
-    modalWindow.open();
+    if (Titanium.Platform.osname !== "android") {
+		modalNav.open();
+	}
+	else {
+		modalWindow.open();
+	}
 }
 
+
+//Create new window
+
+	function makeWindow(url, title) {
+		var mainWinClose = Ti.UI.createButton({
+			style : Ti.UI.iPhone.SystemButtonStyle.DONE,
+			title : 'close'
+		});
+
+		var win = Ti.UI.createWindow({
+			url : url,
+			backgroundColor : 'white',
+			modal : true,
+			title : title,
+			rightNavButton : mainWinClose
+		});
+		if (Titanium.Platform.osname !== "android") {
+			var winNav = Ti.UI.iOS.createNavigationWindow({
+				modal : true,
+				window : win
+			});
+		}
+		win.addEventListener('android:back', function(e) {
+			win.close();
+		});
+		mainWinClose.addEventListener('click', function() {
+			winNav.close();
+		});
+		if (Titanium.Platform.osname !== "android") {
+			return winNav;
+		}
+		else {
+			return win;
+		}
+	}
 
 
 //Helper functions
@@ -394,6 +474,7 @@ exports.copyObjTo = copyObjTo;
 exports.isDirectory = isDirectory;
 exports.formatFilePath = formatFilePath;
 exports.formatNumberStr = formatNumberStr;
+exports.makeWindow = makeWindow;
 
 //Common values
 exports.state = state;

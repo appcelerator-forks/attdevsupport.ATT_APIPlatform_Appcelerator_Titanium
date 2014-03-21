@@ -1,6 +1,6 @@
 //Att common JS module needs to be required.
 var attAPIs = require('att');
-
+var util = require('util');
 //Note: Application Developer should get access key and secret key by registering on www.developer.att.com website
 //and creating sample Application.
 
@@ -17,15 +17,18 @@ var webview = null;
 
 var mainWindow = Ti.UI.currentWindow;
 
-mainWindow.addEventListener('android:back', function(e) {
-	mainWindow.close();
-});
-
 var responseWindow = Ti.UI.createWindow({
 	modal : true,
 	backgroundColor : 'white',
 	title : 'Response'
 });
+
+if (Titanium.Platform.osname !== "android") {
+	var responseNav = Ti.UI.iOS.createNavigationWindow({
+	    modal: true,
+		window: responseWindow
+	});
+}
 
 responseWindow.addEventListener('android:back', function(e) {
 	if (webview !== null) {
@@ -40,26 +43,17 @@ var responseWinRightNavButton = Ti.UI.createButton({
 	title : 'close'
 });
 
-var mainWinClose = Ti.UI.createButton({
-	style : Ti.UI.iPhone.SystemButtonStyle.DONE,
-	title : 'close'
-});
-
 responseWinRightNavButton.addEventListener('click', function() {"use strict";
 	if (webview !== null) {
 		responseWindow.remove(webview);
 		webview = null;
 	}
-	responseWindow.close();
-});
-mainWinClose.addEventListener('click', function() {"use strict";
-	mainWindow.close();
+	responseNav.close();
 });
 
 // //For Iphone Only.
 if (Titanium.Platform.osname !== "android") {
 	responseWindow.setRightNavButton(responseWinRightNavButton);
-	mainWindow.setRightNavButton(mainWinClose);
 }
 
 var responseLable = Ti.UI.createLabel({
@@ -79,7 +73,12 @@ responseWindow.add(responseView);
 function openPopUp(data) {
 	responseLable.text = null;
 	responseLable.text = 'RESPONSE :' + data;
-	responseWindow.open();
+	if (Titanium.Platform.osname !== "android") {
+		responseNav.open();
+	}
+	else {
+		responseWindow.open();
+	}
 }
 
 var header = Ti.UI.createLabel({
@@ -172,11 +171,21 @@ function signPayload(callBack) {
 					authCode = url.substr(index + 20, url.length + 1);
 					Ti.App.AuthCode = authCode;
 					responseWindow.remove(webview);
-					responseWindow.close();
+					if (Titanium.Platform.osname !== "android") {
+						responseNav.close();
+					}
+					else {
+						responseWindow.close();
+					}
 				}
 			});
 			responseWindow.add(webview);
-			responseWindow.open();
+			if (Titanium.Platform.osname !== "android") {
+				responseNav.open();
+			}
+			else {
+				responseWindow.open();
+			}	
 		}, function(error) {
 			Ti.API.error('Error Callback:' + JSON.stringify(error));
 			openPopUp(JSON.stringify(error));
@@ -291,12 +300,15 @@ getTransactionStatus.addEventListener('click', function() {
 
 getNotification.addEventListener('click', function() {
 	Ti.API.info('Get Notification Button Clicked.');
-	var win = Ti.UI.createWindow({
+	var notificationWin = util.makeWindow("notificationUI.js","Notification");
+	notificationWin.open();
+/*	var win = Ti.UI.createWindow({
 		url : 'notificationUI.js',
 		backgroundColor : 'white',
 		modal : true,
 		type : 'SuccesfulRefund'
 	});
+	
 	win.open();
+	*/
 });
-
