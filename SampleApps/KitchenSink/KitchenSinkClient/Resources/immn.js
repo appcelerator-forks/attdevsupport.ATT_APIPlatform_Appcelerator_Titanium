@@ -11,16 +11,49 @@ var redirectUrl = Ti.App.Properties.getString('redirectUrl');
 
 var util = require('util');
 
+var mailboxState,firstMsgId;
+/*
 // some test datas.
 var testTelNumber = "6504549816";
 var testMessageSubject = 'Testing ATT In App Messaging API Subject';
 var testMessageText = 'Testing ATT In App Messaging API Text';
 
+var sendMessageWindow = Ti.UI.createWindow({
+	modal : true,
+	backgroundColor : 'white',
+	title : 'Response'
+});
+
+if (Titanium.Platform.osname !== "android") {
+	var sendMessageNav = Ti.UI.iOS.createNavigationWindow({
+	    modal: true,
+		window: responseWindow
+	});
+}
+sendMessageWindow.addEventListener('android:back', function(e) {'use strict';
+	responseWindow.close();
+});
+
+var sendMessageWinRightNavButton = Ti.UI.createButton({
+	style : Ti.UI.iPhone.SystemButtonStyle.DONE,
+	title : 'close'
+});
+
+sendMessageRightNavButton.addEventListener('click', function() {"use strict";
+	sendMessageNav.close();
+});
+
+// //For Iphone Only.
+if (Titanium.Platform.osname !== "android") {
+	sendMessageWindow.setRightNavButton(responseWinRightNavButton);
+}
+*/
 var mainWindow = Ti.UI.currentWindow;
 
 mainWindow.addEventListener('android:back', function(e) {'use strict';
 	mainWindow.close();
 });
+
 
 var responseWindow = Ti.UI.createWindow({
 	modal : true,
@@ -77,7 +110,155 @@ function openPopUp(data) {'use strict';
 }
 
 
-var textNumber = Ti.UI.createTextField({
+
+var sendMessageBtn = Ti.UI.createButton({
+	title : 'Send Message',
+	top : Ti.UI.Android ? "80dp" : 40,
+	height : Ti.UI.Android ? "35dp" : 30
+});
+var createMessageIndexBtn = Ti.UI.createButton({
+	title : 'Create Message Index',
+	top : Ti.UI.Android ? "120dp" : 80,
+	height : Ti.UI.Android ? "35dp" : 30
+});
+
+var getIndexInfoBtn = Ti.UI.createButton({
+	title : 'Get Message Index Info',
+	top : Ti.UI.Android ? "160dp" : 120,
+	height : Ti.UI.Android ? "35dp" : 30
+});
+var getMessageListBtn = Ti.UI.createButton({
+	title : 'Get Message List',
+	top : Ti.UI.Android ? "200dp" : 160,
+	height : Ti.UI.Android ? "35dp" : 30
+});
+var getMessageDeltaBtn = Ti.UI.createButton({
+	title : 'Get Message Delta',
+	top : Ti.UI.Android ? "240dp" : 200,
+	height : Ti.UI.Android ? "35dp" : 30
+});
+
+var msgIdBox = Ti.UI.createTextField({
+	top : Ti.UI.Android ? "280dp" : 240,
+	right : 10,
+	left : 10,
+	height : Ti.UI.Android ? "40dp" : 40,
+	color : 'black',
+	borderColor : 'black',
+	hintText : 'Enter messageID'
+});
+
+var getMessageBtn = Ti.UI.createButton({
+	title : 'Get Message',
+	left: 70,
+	top : Ti.UI.Android ? "320dp" : 280,
+	height : Ti.UI.Android ? "35dp" : 30
+});
+var deleteMessageBtn = Ti.UI.createButton({
+	title : 'Delete',
+	top : Ti.UI.Android ? "320dp" : 280,
+	left:10,
+	height : Ti.UI.Android ? "35dp" : 30
+});
+
+getMessageListBtn.addEventListener('click', function() {
+	Ti.API.info('Get Message List Button Clicked.');
+	authorize('getMessageList');
+});
+createMessageIndexBtn.addEventListener('click', function() {
+	Ti.API.info('Get Message List Button Clicked.');
+	authorize('createMessageIndex');
+});
+
+getMessageDeltaBtn.addEventListener('click', function() {
+	Ti.API.info('Get Message List Button Clicked.');
+	authorize('getMessageDelta');
+});
+
+getIndexInfoBtn.addEventListener('click', function() {
+	Ti.API.info('Get Message List Button Clicked.');
+	authorize('getMessageIndexInfo');
+});
+deleteMessageBtn.addEventListener('click', function() {
+	Ti.API.info('Get immn Message Content Button Clicked.');
+	authorize('deleteMessage');
+});
+getMessageBtn.addEventListener('click', function() {
+	Ti.API.info('Get Message button clicked');
+	authorize('getMessage');
+});
+sendMessageBtn.addEventListener('click', function() {
+	Ti.API.info('Get immn Message Content Button Clicked.');
+	var sendMessageWindow = util.makeWindow("sendInAppMessage.js","Send Message");
+	sendMessageWindow.open();
+});
+
+
+mainWindow.add(sendMessageBtn);
+mainWindow.add(createMessageIndexBtn);
+mainWindow.add(getIndexInfoBtn);
+mainWindow.add(getMessageListBtn);
+mainWindow.add(getMessageDeltaBtn);
+mainWindow.add(getMessageBtn);
+mainWindow.add(deleteMessageBtn);
+mainWindow.add(msgIdBox);
+
+function authorize(type) {
+    function runTypeFunc() {
+        switch(type)
+        {
+            case 'sendMessage':sendMessage();
+            break;
+            case 'createMessageIndex':createMessageIndex();
+            break;
+            case 'getMessageIndexInfo':getMessageIndexInfo();
+            break;
+            case 'getMessageList':getMessageList();
+            break;
+            case 'getMessageDelta':getMessageDelta();
+            break;
+            case 'getMessage':getMessage();
+            break;
+            case 'getcontent': getMessageContent();
+            break;
+            case 'deleteMessage': deleteMessage();
+            break;
+        }
+    }
+	
+	if(attAPIs.ATT.getCachedUserAuthToken()) {
+	    runTypeFunc();
+	} else {
+	    //Get the user authorization URI
+		attAPIs.ATT.OAuth.obtainEndUserAuthorization({
+            clientId: accessKey,
+            scope: scope,
+            redirectUrl: redirectUrl
+        }, function(resp) {
+            //Create a webview to take the user through user authorization and get the auth code
+            util.UI.createGetAuthCodeView(mainWindow, JSON.parse(resp).uri, redirectUrl, function(resp) { //Success
+                var authCode = resp.code;
+                var grantType = 'authorization_code';
+                attAPIs.ATT.authorize(accessKey, secretKey, scope, grantType, authCode);
+                
+                runTypeFunc();
+            }, 
+            function(errorResp) { //User Auth Error
+                Ti.API.error('User Auth Error: ' + errorResp);
+            });
+        }, function(errorResp) { //Get User Auth URI Error
+            Ti.API.error('Get User Auth URI Error: ' + errorResp);
+        });
+	}
+}
+
+// some test datas.
+var testTelNumber = "6504549816";
+var testMessageSubject = 'Testing ATT In App Messaging API Subject';
+var testMessageText = 'Testing ATT In App Messaging API Text';
+
+
+/*var textNumber = Ti.UI.createTextField({
 	top : 20,
 	right : 10,
 	left : 10,
@@ -95,7 +276,6 @@ var textSubject = Ti.UI.createTextField({
 	borderColor : 'black',
 	hintText : 'Enter subject here'
 });
-
 var text = Ti.UI.createTextField({
 	top : 115,
 	right : 10,
@@ -110,21 +290,12 @@ var GetAttachment = Ti.UI.createButton({
 	top : Ti.UI.Android ? "300dp" : 260,
 	height : Ti.UI.Android ? "35dp" : 30
 });
-var immnSendMessageButton = Ti.UI.createButton({
+var SendMessageButton = Ti.UI.createButton({
 	title : 'Send Message',
 	top : Ti.UI.Android ? "340dp" : 300,
 	height : Ti.UI.Android ? "35dp" : 30
 });
-var GetimmnMessageHeaderBtn = Ti.UI.createButton({
-	title : 'Get Message Headers',
-	top : Ti.UI.Android ? "380dp" : 340,
-	height : Ti.UI.Android ? "35dp" : 30
-});
-var GetimmnMessageContentBtn = Ti.UI.createButton({
-	title : 'Get Message Content',
-	top : Ti.UI.Android ? "420dp" : 380,
-	height : Ti.UI.Android ? "35dp" : 30
-});
+
 var dispAttachment = Ti.UI.createScrollView({
 	top : 170,
 	left : 0,
@@ -184,76 +355,22 @@ GetAttachment.addEventListener('click', function(e) {
 	});
 });
 
-immnSendMessageButton.addEventListener('click', function() {
-	Ti.API.info('Send IMMN Msg Button Clicked.');
-	authorize('sendmessage');
+SendMessageButton.addEventListener('click', function() {
+	Ti.API.info('Send IAM Msg Button Clicked.');
+	authorize(sendMessage);
 
 });
+sendMessageWindow.add(textNumber);
+sendMessageWindow.add(textSubject);
+sendMessageWindow.add(text);
+sendMessageWindow.add(GetAttachment);
+sendMessageWindow.add(immnSendMessageButton);
+sendMessageWindow.add(dispAttachment);
 
-GetimmnMessageHeaderBtn.addEventListener('click', function() {
-	Ti.API.info('Get immn Message Header Button Clicked.');
-	authorize('getheader');
-
-});
-
-GetimmnMessageContentBtn.addEventListener('click', function() {
-	Ti.API.info('Get immn Message Content Button Clicked.');
-	authorize('getcontent');
-});
-
-mainWindow.add(textNumber);
-mainWindow.add(textSubject);
-mainWindow.add(text);
-mainWindow.add(GetAttachment);
-mainWindow.add(immnSendMessageButton);
-mainWindow.add(GetimmnMessageHeaderBtn);
-mainWindow.add(GetimmnMessageContentBtn);
-mainWindow.add(dispAttachment);
-
-
-function authorize(type) {
-    function runTypeFunc() {
-        switch(type)
-        {
-            case 'sendmessage':sendMessage();
-            break;
-            case 'getheader':getMessageHeaders();
-            break;
-            case 'getcontent': getMessageContent();
-            break;
-        }
-    }
-	
-	if(attAPIs.ATT.getCachedUserAuthToken()) {
-	    runTypeFunc();
-	} else {
-	    //Get the user authorization URI
-		attAPIs.ATT.OAuth.obtainEndUserAuthorization({
-            clientId: accessKey,
-            scope: scope,
-            redirectUrl: redirectUrl
-        }, function(resp) {
-            //Create a webview to take the user through user authorization and get the auth code
-            util.UI.createGetAuthCodeView(mainWindow, JSON.parse(resp).uri, redirectUrl, function(resp) { //Success
-                var authCode = resp.code;
-                var grantType = 'authorization_code';
-                attAPIs.ATT.authorize(accessKey, secretKey, scope, grantType, authCode);
-                
-                runTypeFunc();
-            }, 
-            function(errorResp) { //User Auth Error
-                Ti.API.error('User Auth Error: ' + errorResp);
-            });
-        }, function(errorResp) { //Get User Auth URI Error
-            Ti.API.error('Get User Auth URI Error: ' + errorResp);
-        });
-	}
-}
-
-
+*/
 
 function sendMessage()
-{
+{	
 	var i, AddString = [], addArr;
 	var phoneNumber = textNumber.value;
 	if (phoneNumber.length > 0) {
@@ -261,9 +378,12 @@ function sendMessage()
 		for ( i = 0; i < addArr.length; i = i + 1) {
 			if(addArr[i].indexOf('@') >= 0) { //Assume it's an email
 			    AddString.push("email:" + addArr[i]);
-			} else {
-    			AddString.push("tel:" + addArr[i]);
+			} else if(addArr[i].length <= 8) {
+    			AddString.push("short:" + addArr[i]);
+            } else {
+           		AddString.push("tel:" + addArr[i]);
             }
+            
 		}
 	} else {
 		textNumber.value = testTelNumber;
@@ -289,16 +409,17 @@ function sendMessage()
 
 	//@param args- is send as first parameter containing body along with attachments
 	var args = {
-		"body" : {
-			"Addresses" : AddString,
-			"Text" : text.value,
-			"Subject" : textSubject.value
-		},
+		"body" : { "body" :{
+			"addresses" : AddString,
+			"subject" : textSubject.value,
+			"text" : text.value
+		}},
 		"contentType" : "application/json",
-		"accept" : "application/json",
+		"Accept" : "application/json",
 		"attachments" : fileArray
 	};
-	attAPIs.ATT.IMMN.sendMessage(args, function(data) {
+	
+	attAPIs.ATT.InAppMessaging.sendMessage(args, function(data) {
 		responseLable.text = null;
 		Ti.API.info('Success Callback:' + data);
 		if (args.accept === "application/json") {
@@ -324,33 +445,31 @@ function sendMessage()
 	});
 }
 
+
+
 var mmsMessage = null;
 
-function getMessageHeaders()
+function getMessageList()
 {
-	attAPIs.ATT.IMMN.getMessageHeaders({
+	
+	attAPIs.ATT.InAppMessaging.getMessageList({
 		'accept' : 'application/json',
-		'headerCount' : 50 //Valid Range: Min = 1, Max = 500 // Should be integer
+		'limit' : 20 //Valid Range: Min = 1, Max = 500 // Should be integer
 	}, function(data) {
-		//Find a message with an attachment
-		try {
-            var messages = JSON.parse(data), headers = messages.MessageHeadersList.Headers, i = 0, l = headers.length;
-            for(; i < l; i++) {
-                if(headers[i].MmsContent && headers[i].MmsContent.length > 0) break;
-            }
-            mmsMessage = headers[i];
-		} catch(e) {
-		    Ti.API.error('Error Parsing Data: ' + data);
-		    return;
+		//Get id of first message (To use in Delete,update,get message)
+		data =JSON.parse(data);
+		mailboxState = data.messageList.state;
+		if(data.messageList.messages.length>0) {
+			firstMsgId =  data.messageList.messages[0].messageId;
+			msgIdBox.value = firstMsgId;
 		}
-		
 		responseLable.text = null;
-		responseLable.text = 'RESPONSE :' + data;
+		responseLable.text = 'RESPONSE :' + JSON.stringify(data);
 		if (Titanium.Platform.osname !== "android") {
-		responseNav.open();
+			responseNav.open();
 		}
 		else {
-		responseWindow.open();
+			responseWindow.open();
 		}
 		
 	}, function(error) {
@@ -360,8 +479,7 @@ function getMessageHeaders()
 	});
 }
 
-function getMessageContent()
-{
+function getMessageContent() {
 	if(!mmsMessage) {
 	    alert('Get content headers then this method will display the first mms attachment from the messages');
 	    return;
@@ -392,4 +510,121 @@ function getMessageContent()
 		Ti.API.error('Error Callback:' + JSON.stringify(error));
 		openPopUp(JSON.stringify(error));
 	});
+}
+
+function createMessageIndex() {
+	
+	attAPIs.ATT.InAppMessaging.createMessageIndex({
+		'accept' : 'application/json'
+	}, function(data) {
+		alert("Message Index Created");
+		responseLable.text = null;
+		Ti.API.info('Success Callback:' + data);
+		/*if (args.accept === "application/json") {
+			responseLable.text = 'RESPONSE :' + JSON.stringify(data);
+		} else {
+			responseLable.text = 'RESPONSE :' + data;
+		}
+		if (Titanium.Platform.osname !== "android") {
+	 		responseNav.open();
+		}
+		else {
+			responseWindow.open();
+		}*/
+	}, function(error) {
+		Ti.API.error('Error Callback:' + JSON.stringify(error));
+		openPopUp(JSON.stringify(error));
+	});
+	
+}
+
+function getMessageIndexInfo() {
+	
+	
+	attAPIs.ATT.InAppMessaging.getMessageIndexInfo({
+		'accept' : 'application/json'
+	}, function(data) {
+		//alert(data.messageIndexInfo.status);
+		responseLable.text = null;
+		Ti.API.info('Success Callback:' + data);
+		
+			responseLable.text = 'RESPONSE :' + JSON.stringify(data);
+		
+		if (Titanium.Platform.osname !== "android") {
+	 		responseNav.open();
+		}
+		else {
+			responseWindow.open();
+		}
+	}, function(error) {
+		Ti.API.error('Error Callback:' + JSON.stringify(error));
+		openPopUp(JSON.stringify(error));
+	});
+
+	
+}
+
+function getMessageDelta() {
+		attAPIs.ATT.InAppMessaging.getMessagesDelta({
+		'contentType' : "application/json",
+		'state'  : mailboxState
+	}, function(data) {
+		responseLable.text = null;
+		Ti.API.info('Success Callback:' + data);
+		if (args.accept === "application/json") {
+			responseLable.text = 'RESPONSE :' + JSON.stringify(data);
+		} else {
+			responseLable.text = 'RESPONSE :' + data;
+		}
+		if (Titanium.Platform.osname !== "android") {
+	 		responseNav.open();
+		}
+		else {
+			responseWindow.open();
+		}
+	}, function(error) {
+		Ti.API.error('Error Callback:' + JSON.stringify(error));
+		openPopUp(JSON.stringify(error));
+	});
+
+}
+function getMessage() {
+	attAPIs.ATT.InAppMessaging.getMessage({
+		'accept' : 'application/json',
+		'messageId' : msgIdBox.value
+	}, function(data) {
+		responseLable.text = null;
+		Ti.API.info('Success Callback:' + data);
+		//isUnread= data.message.isUnread;
+			responseLable.text = 'RESPONSE :' + JSON.stringify(data);
+		if (Titanium.Platform.osname !== "android") {
+	 		responseNav.open();
+		}
+		else {
+			responseWindow.open();
+		}
+	}, function(error) {
+		Ti.API.error('Error Callback:' + JSON.stringify(error));
+		openPopUp(JSON.stringify(error));
+	});
+
+	
+}
+function deleteMessage() {
+	attAPIs.ATT.InAppMessaging.deleteMessage({
+		'accept' : 'application/json',
+		'messageId' : msgIdBox.value
+	}, function(data) {
+		Ti.API.info('Success Callback:' + data);
+		alert("Message: "+ msgIdBox.value + " Successfully deleted");
+		msgIdBox.value ='';
+		firstMsgId = null;
+	}, function(error) {
+		Ti.API.error('Error Callback:' + JSON.stringify(error));
+		openPopUp(JSON.stringify(error));
+	});	
+}
+
+function sendMessage() {
+	
 }
