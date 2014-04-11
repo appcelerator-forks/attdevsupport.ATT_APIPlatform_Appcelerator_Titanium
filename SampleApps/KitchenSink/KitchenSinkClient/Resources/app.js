@@ -8,14 +8,13 @@ var apiWin = Titanium.UI.createWindow({
 });
 
 if (Titanium.Platform.osname !== "android") {
-	var baseWin = Ti.UI.createWindow();
-	var navGroup = Ti.UI.iPhone.createNavigationGroup({
+	
+	var navGroup = Ti.UI.iOS.createNavigationWindow({
 		window : apiWin
 	});
-
-	apiWin.navGroup = navGroup;
-	baseWin.add(navGroup);
-	baseWin.open();
+	
+apiWin.navGroup = navGroup;
+navGroup.open();
 
 } else {
 	apiWin.open();

@@ -1,6 +1,6 @@
 
 'use strict';
-
+var mainWindow = Ti.UI.currentWindow;
 // Create a TableView.
 var apiList = Ti.UI.createTableView(),
     isAndroid = (Titanium.Platform.osname === 'android');
@@ -23,7 +23,7 @@ var apiDetails = [
    { url: 'sms.js',             title: 'SMS' },
    { url: 'mms.js',             title: 'MMS' },
    { url: 'immn.js',            title: 'In App Messaging from Mobile Number' },
-   { url: 'speechToText.js',  title: 'Speech' },
+   { url: 'speechToText.js',  	title: 'Speech' },
    { url: 'speechCustom.js',    title: 'Speech Custom' },
    { url: 'textToSpeech.js',    title: 'Text To Speech' },
    { url: 'payment.js',         title: 'Payment' }
@@ -40,15 +40,14 @@ apiList.addEventListener('click', function(e) {
 	Ti.API.info(e.rowData.id + ' clicked.');
 	if(e.rowData.id) {
 		var win = Titanium.UI.createWindow({
-			title : e.rowData.id, url : e.rowData.url, backgroundColor : '#fff',navBarHidden:false
+			title : e.rowData.id, url : e.rowData.url, backgroundColor : '#fff', navBarHidden:false
 		});
 		
 		if(isAndroid) {
 			win.open();
 		} else {
-			var currentWin = Ti.UI.currentWindow;
-			win.navGroup = currentWin.navGroup;
-			currentWin.navGroup.open(win);
+			var navGroup = mainWindow.navGroup;
+			navGroup.openWindow(win);
 		}
 	}
 });
