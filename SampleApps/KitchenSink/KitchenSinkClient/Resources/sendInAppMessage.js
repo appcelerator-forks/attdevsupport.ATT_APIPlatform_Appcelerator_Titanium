@@ -79,6 +79,7 @@ GetAttachment.addEventListener('click', function(e) {
 				file = Titanium.Filesystem.externalStorageDirectory + "/" + fileName;
 			}
 			savedFile = Titanium.Filesystem.getFile(file);
+
 			if (!savedFile.exists()) {
 				savedFile.write(event.media);
 			}
@@ -95,6 +96,7 @@ GetAttachment.addEventListener('click', function(e) {
 					'fileType' : "image/jpg",
 					'filePath' : 'mnt/sdcard/' + Ti.App.id + '/' + fileName
 				};
+				
 			}
 			fileArray.push(firstFile);
 
@@ -106,7 +108,6 @@ GetAttachment.addEventListener('click', function(e) {
 				borderColor : 'black',
 				image : event.media
 			});
-
 			dispAttachment.add(picView);
 			
 		},
@@ -124,9 +125,9 @@ SendMessageButton.addEventListener('click', function() {
 sendMessageWindow.add(textNumber);
 sendMessageWindow.add(textSubject);
 sendMessageWindow.add(text);
-sendMessageWindow.add(GetAttachment);
+//sendMessageWindow.add(GetAttachment);
 sendMessageWindow.add(SendMessageButton);
-sendMessageWindow.add(dispAttachment);
+//sendMessageWindow.add(dispAttachment);
 
 
 
@@ -167,36 +168,26 @@ function sendMessage()
 	 * contentType @ application/x-www-form-urlencoded
 	 "body":"Addresses=tel%3A%2BXXXXXXXXXX&Text=TEST& Subject=TestIMMNURL",
 	 **/
-//alert(AddString +" " + text.value + textSubject.value );
+
 	//@param args- is send as first parameter containing body along with attachments
-	var args = {
-		
+var args = {
+		"attachments" : fileArray,
 		"contentType" : "application/json",
-		"accept" : "application/json",
-		"attachments" : fileArray
+		"accept" : "application/json"
 	};
-	args.body={ "messageRequest" :{
-			"addresses" : AddString,
-			"text" : text.value,
+	
+	args.body= { "messageRequest" :
+	{		
+			"Addresses" : AddString,
+			"Text" : text.value,
 			"subject" : textSubject.value,
-			"isGroup" : false }
+			"isGroup" : false 
+		}
 	};
 	attAPIs.ATT.InAppMessaging.sendMessage(args, function(data) {
-		//responseLable.text = null;
 		Ti.API.info('Success Callback:' + data);
 		alert('RESPONSE :' + JSON.stringify(data));
-		/*if (args.accept === "application/json") {
-			responseLable.text = 'RESPONSE :' + JSON.stringify(data);
-		} else {
-			responseLable.text = 'RESPONSE :' + data;
-		}
-		if (Titanium.Platform.osname !== "android") {
-		responseNav.open();
-		}
-		else {
-		responseWindow.open();
-		}
-		*/
+		
 		for(cnt=(dispAttachment.children.length-1);cnt>=0;cnt--){
 			dispAttachment.remove(dispAttachment.children[cnt]);
 		}
@@ -205,7 +196,7 @@ function sendMessage()
 	}, function(error) {
 		Ti.API.error('Error Callback:' + JSON.stringify(error));
 		alert(JSON.stringify(error));
-		//openPopUp(JSON.stringify(error));
+		
 	});
 }
 
