@@ -125,9 +125,9 @@ SendMessageButton.addEventListener('click', function() {
 sendMessageWindow.add(textNumber);
 sendMessageWindow.add(textSubject);
 sendMessageWindow.add(text);
-//sendMessageWindow.add(GetAttachment);
+sendMessageWindow.add(GetAttachment);
 sendMessageWindow.add(SendMessageButton);
-//sendMessageWindow.add(dispAttachment);
+sendMessageWindow.add(dispAttachment);
 
 
 
@@ -178,8 +178,8 @@ var args = {
 	
 	args.body= { "messageRequest" :
 	{		
-			"Addresses" : AddString,
-			"Text" : text.value,
+			"addresses" : AddString,
+			"text" : text.value,
 			"subject" : textSubject.value,
 			"isGroup" : false 
 		}
