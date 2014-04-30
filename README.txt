@@ -9,7 +9,7 @@ The AT&T Titanium modules provide interfaces that facilitate access to the follo
 • Speech
 • Speech Custom Method
 • Text to Speech
-• In App Messaging
+• In-App Messaging
 • Notary Management
 • Payment
 • OAuth 2.0 Authentication Management
@@ -17,11 +17,11 @@ The AT&T Titanium modules provide interfaces that facilitate access to the follo
 Please view the modules located in the "Module" folder and then test out the AT&T Titanium Mobile SDK in our sample apps located in the "SampleApp" folder
 
 ===============Tested versions===============
-Titanium Studio: 3.1.2
-Titanium SDK: 3.1.3
-XCode 5.0
+Titanium Studio: 3.1.3
+Titanium SDK: 3.2.2
+XCode 5.1
 Android SDK r20.0.3
-iOS Simulator: iOS 6.0, iOS 7.0 for both iPhone and iPad Simulators
+iOS Simulator: iOS 6.0, iOS 7.1 for both iPhone and iPad Simulators
 Android Emulator: 4.0.3 WVGA800, 4.1.2 WVGA800
 
 ===============Notes=====================
