@@ -55,10 +55,6 @@
     <property name="shortCode">XXXXXXXX</property>
     <property name="scope">MMS,SMS,SPEECH,STTC,TTS</property>
     <property name="authScope">IMMN,MIM</property>
-    <property name="merchantID">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</property>
-    <property name="amount">0.99</property>
-    <property name="description">Purchase</property>
-    <property name="paymentServerUrl">http://attdemo.somee.com/ATTNotifications/</property>
     <property name="redirectUrl">http://attdemo.somee.com/AttNotifications/SuccessfulAuthentication.html</property>
     <modules>
         <module platform="commonjs">att</module>

@@ -22,11 +22,10 @@ function addApi(titleName, url) {
 var apiDetails = [
    { url: 'sms.js',             title: 'SMS' },
    { url: 'mms.js',             title: 'MMS' },
-   { url: 'immn.js',            title: 'In-App Messaging' },
+   { url: ''	  ,             title: 'In-App Messaging' },
    { url: 'speechToText.js',  	title: 'Speech' },
    { url: 'speechCustom.js',    title: 'Speech Custom' },
-   { url: 'textToSpeech.js',    title: 'Text To Speech' },
-   { url: 'payment.js',         title: 'Payment' }
+   { url: 'textToSpeech.js',    title: 'Text To Speech' }
    
 ];
 
@@ -42,6 +41,13 @@ apiList.addEventListener('click', function(e) {
 		var win = Titanium.UI.createWindow({
 			title : e.rowData.id, url : e.rowData.url, backgroundColor : '#fff', navBarHidden:false
 		});
+		if (Titanium.Platform.osname !== "android") {
+			var winNav = Ti.UI.iOS.createNavigationWindow({
+	   	 		modal: true,
+				window: win
+			});
+			win.winNav = winNav;
+		}
 		
 		if(isAndroid) {
 			win.open();
