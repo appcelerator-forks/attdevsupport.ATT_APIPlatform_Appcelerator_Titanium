@@ -22,7 +22,7 @@ function addApi(titleName, url) {
 var apiDetails = [
    { url: 'sms.js',             title: 'SMS' },
    { url: 'mms.js',             title: 'MMS' },
-   { url: ''	  ,             title: 'In-App Messaging' },
+   { url: 'immn.js'	  ,             title: 'In-App Messaging' },
    { url: 'speechToText.js',  	title: 'Speech' },
    { url: 'speechCustom.js',    title: 'Speech Custom' },
    { url: 'textToSpeech.js',    title: 'Text To Speech' }
