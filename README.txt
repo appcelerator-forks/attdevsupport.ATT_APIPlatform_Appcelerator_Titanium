@@ -10,9 +10,7 @@ The AT&T Titanium modules provide interfaces that facilitate access to the follo
 • Speech Custom Method
 • Text to Speech
 • In App Messaging
-• Notary Management
-• Payment
-• OAuth 2.0 Authentication Management
+
 
 Please view the modules located in the "Module" folder and then test out the AT&T Titanium Mobile SDK in our sample apps located in the "SampleApp" folder
 
