@@ -150,7 +150,7 @@ var msgIdBox = Ti.UI.createTextField({
 
 var getMessageBtn = Ti.UI.createButton({
 	title : 'Get Message',
-	left: 70,
+	left: 90,
 	top : Ti.UI.Android ? "320dp" : 280,
 	height : Ti.UI.Android ? "35dp" : 30
 });
@@ -233,7 +233,9 @@ function authorize(type) {
 		attAPIs.ATT.OAuth.obtainEndUserAuthorization({
             clientId: accessKey,
             scope: scope,
-            redirectUrl: redirectUrl
+            redirectUrl: redirectUrl,
+            bypass_onnetwork_auth : Ti.App.Properties.getBool('bypass_onnetwork_auth',false),
+            suppress_landing_page : Ti.App.Properties.getBool('suppress_landing_page',false)
         }, function(resp) {
             //Create a webview to take the user through user authorization and get the auth code
             util.UI.createGetAuthCodeView(mainWindow, JSON.parse(resp).uri, redirectUrl, function(resp) { //Success
@@ -244,7 +246,7 @@ function authorize(type) {
                 runTypeFunc();
             }, 
             function(errorResp) { //User Auth Error
-                Ti.API.error('User Auth Error: ' + errorResp);
+                Ti.API.error('User Auth Error: ' + JSON.stringify(errorResp));
             });
         }, function(errorResp) { //Get User Auth URI Error
             Ti.API.error('Get User Auth URI Error: ' + errorResp);

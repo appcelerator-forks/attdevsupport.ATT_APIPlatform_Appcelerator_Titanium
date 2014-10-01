@@ -856,18 +856,18 @@
  *
  * <b>Important Note:</b> Currently, this method call is only necessary and supported for applications attempting to consume the following APIs:
  *
- * 1) Location API
  *
- * 2) In App Messaging from Mobile Number API
+ * 1) In App Messaging from Mobile Number API
  *
  * @param {Object} options A JSON object containing the following properties :
  * @param {String} options.clientId The API Key that is assigned to the application when the developer creates an application account at https://devconnect-api.att.com.
  * @param {String} options.scope Specifies the services for which the application is requesting the end-user to provide consent. The value of the scope parameter is a comma delimited list containing one or more of the following values that represent the services that are in scope.
  *
- * • Terminal Location – TL.
  *
  * • In App Messaging from Mobile Number – IMMN
  * @param {String} [options.redirectUrl] The URL where the subscriber’s browser will be redirected following completion of the authorization process. If this parameter is not present in the request, the AT&T Gateway will use the value of provided OAuth Redirect URL that is provided by the developer in the AT&T API Platform console when the application is registered.
+ * @param {Boolean} [options.bypass_onnetwork_auth] Forces a particular user authentication flow during authentication
+ * @param {Boolean} [options.suppress_landing_page] Suppresses the display of the “switch user landing page” during a Get User Authorization request with a remember me cookie present on the device.
  * @param {Function} success The callback function that is called when the method returns success.
  * @param {Function} error The callback function that is called when the method returns an error.
  * @return {String} <b>Specifies a query parameter that is included with the redirect_url parameter of the authorize method in the original OAuth request.</b>
@@ -879,7 +879,9 @@
  *      obtainEndUserAuthorization({
  *           'clientId' : 'API Key',
  *           'scope' : 'scope values',
- *          'redirectUrl' : 'redirect url'
+ *           'redirectUrl' : 'redirect url',
+ *			 'bypass_onnetwork_auth': true,
+ *			 'suppress_landing_page' : false		
  *      },function(data) {
  *
  *         success Callback

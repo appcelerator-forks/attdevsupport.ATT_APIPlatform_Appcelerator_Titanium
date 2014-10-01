@@ -8,7 +8,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.1.3.GA</sdk-version>
+    <sdk-version>3.3.0.GA</sdk-version>
     <id>com.att.developeratt</id>
     <name>ATTTiKitchenSink</name>
     <version>1.0</version>
@@ -50,15 +50,18 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
-    <property name="accessKey">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</property>
-    <property name="secretKey">XXXXXXXXXXXXXXX</property>
+    <property name="accessKey">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</property>
+    <property name="secretKey">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</property>
     <property name="shortCode">XXXXXXXX</property>
-    <property name="scope">MMS,SMS,SPEECH,STTC,TTS</property>
-    <property name="authScope">IMMN,MIM</property>
-    <property name="redirectUrl">http://attdemo.somee.com/AttNotifications/SuccessfulAuthentication.html</property>
+    <property name="scope"></property>
+    <property name="authScope"></property>
+    <property name="redirectUrl">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</property>
+    <property name="merchantID">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</property>
+    <property name="amount">0.99</property>
+    <property name="description">Purchase</property>
+    <property name="paymentServerUrl">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</property>
+   
     <modules>
-        <module platform="commonjs">att</module>
-        <module platform="android">ti.api.att</module>
-        <module platform="iphone">ti.api.att</module>
+        
     </modules>
 </ti:app>

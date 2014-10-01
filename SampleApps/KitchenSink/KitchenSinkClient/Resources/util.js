@@ -317,7 +317,8 @@ function createGetAuthCodeView(win, authUrl, redirectUrl, codeCB, errorCB) {
     var calledCB = false,
         webView = Ti.UI.createWebView({
             modal: true,
-            url : authUrl
+            url : authUrl,
+            ignoreSslError:true
         });
     
     webView.addEventListener('load', function(e) {
