@@ -27,7 +27,7 @@ var apiDetails = [
    { url: 'speechToText.js',  	title: 'Speech' },
    { url: 'speechCustom.js',    title: 'Speech Custom' },
    { url: 'textToSpeech.js',    title: 'Text To Speech' },
-   { url: 'payment.js',    		title: 'Text To Speech' }
+   { url: 'payment.js',    		title: 'Payment' }
    
 ];
 

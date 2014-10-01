@@ -28,7 +28,22 @@ if (Titanium.Platform.osname !== "android") {
 		window: responseWindow
 	});
 }
+function checkSubCode () {
+	if(Ti.App.SubscriptionAuthCode) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
+
+function checkSubCode () {
+	if(Ti.App.SubsConsumerId) {
+		return true;
+	} else {
+		return false;
+	}
+}
 responseWindow.addEventListener('android:back', function(e) {
 	if (webview !== null) {
 		responseWindow.remove(webview);
@@ -107,14 +122,16 @@ var getSubscriptionStatus = Ti.UI.createButton({
 	title : 'Subscription Status',
 	top : Ti.UI.Android ? "75dp" : 75,
 	width : '100%',
-	topInteger : 75
+	topInteger : 75,
+	touchEnabled : checkSubCode();
 });
 
 var getSubscriptionDetails = Ti.UI.createButton({
 	title : 'Subscription Details',
 	top : Ti.UI.Android ? "115dp" : 115,
 	width : '100%',
-	topInteger : 115
+	topInteger : 115,
+	touchEnabled : checkSubId();
 });
 
 
@@ -209,7 +226,7 @@ var createTableViewRow = function(transactionId) {
  "Description" : "TEST",
  "MerchantTransactionId" : "skuser" + ticks,
  "MerchantProductId" : "l" + ticks,
- "MerchantPaymentRedirectUrl" : Ti.App.Properties.getString('paymentServerUrl')+"PaymentSuccess.aspx",
+ "MerchantPaymentRedirectUrl" : Ti.App.Properties.getString('paymentServerUrl'),
  "MerchantSubscriptionIdList" : 'ML1234567890',
  "IsPurchaseOnNoActiveSubscription" : false,
  "SubscriptionRecurrences" : 99999,
@@ -227,7 +244,7 @@ function signPayload() {
 		"Description" : description,
 		"MerchantTransactionId" : "skuser" + rnd,
 		"MerchantProductId" : "l" + rnd,
-		"MerchantPaymentRedirectUrl" : Ti.App.Properties.getString('paymentServerUrl') + "PaymentSuccess.aspx",
+		"MerchantPaymentRedirectUrl" : Ti.App.Properties.getString('paymentServerUrl') ,
 		"MerchantSubscriptionIdList" : 'ML' + rnd,
 		"IsPurchaseOnNoActiveSubscription" : 'false',
 		"SubscriptionRecurrences" : 99999,
@@ -262,6 +279,9 @@ function signPayload() {
 				if (url.indexOf('SubscriptionAuthCode') !== -1) {
 					index = url.indexOf("SubscriptionAuthCode");
 					Ti.App.subscriptionAuthCode = url.substr(index + 21, url.length + 1);
+					getSubscriptionStatus.setTouchEnabled(true);
+					
+
 					responseWindow.remove(webview);
 					if (Titanium.Platform.osname !== "android") {
 						responseNav.close();
@@ -311,6 +331,7 @@ getSubscriptionStatus.addEventListener('click', function() {
 		if (Ti.App.SubscriptionId !== result.SubscriptionId) {
 			Ti.App.SubscriptionId = result.SubscriptionId;
 			Ti.App.SubsConsumerId = result.ConsumerId;
+			getSubscriptionDetails.setTouchEnabled(true);
 			createTableViewRow(result.SubscriptionId);
 			transactionTable.visible = true;
 			Ti.App.subscriptionAuthCode = null;
@@ -336,6 +357,7 @@ getSubscriptionDetails.addEventListener('click', function() {
 		Ti.API.error('Error Callback:' + error);
 	});
 });
+
 
 
 mainWindow.add(header);

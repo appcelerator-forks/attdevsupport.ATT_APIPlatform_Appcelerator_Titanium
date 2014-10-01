@@ -110,20 +110,15 @@ var getTransactionStatus = Ti.UI.createButton({
 	title : 'Transaction Status',
 	top : Ti.UI.Android ? "75dp" : 75,
 	width : '100%',
-	topInteger : 75
+	topInteger : 75,
+	touchEnabled : false
 });
 
-var getNotification = Ti.UI.createButton({
-	title : 'Notification',
-	top : Ti.UI.Android ? "115dp" : 115,
-	width : '100%',
-	topInteger : 115
-});
+
 
 mainWindow.add(header);
 mainWindow.add(btnnewTransaction);
 mainWindow.add(getTransactionStatus);
-mainWindow.add(getNotification);
 mainWindow.add(transactionTable);
 
 var rowHeight = 40, tableHeight = 0, intTableHeight = 0, height = 5;
@@ -138,7 +133,7 @@ function signPayload(callBack) {
 		"Description" : description,
 		"MerchantTransactionId" : "skuser" + rnd,
 		"MerchantProductId" : "l" + rnd,
-		"MerchantPaymentRedirectUrl" : Ti.App.Properties.getString('paymentServerUrl') + "PaymentSuccess.aspx"
+		"MerchantPaymentRedirectUrl" : Ti.App.Properties.getString('paymentServerUrl') 
 	}, signedDocument = null, signature = null;
 
 	attAPIs.ATT.Notary.signedPayload({
@@ -169,7 +164,8 @@ function signPayload(callBack) {
 				if (url.indexOf('TransactionAuthCode') !== -1) {
 					index = url.indexOf("TransactionAuthCode");
 					authCode = url.substr(index + 20, url.length + 1);
-					Ti.App.AuthCode = authCode;
+					Ti.App.AuthCode = authCode; //here
+					getTransactionStatus.setTouchEnabled(true);
 					responseWindow.remove(webview);
 					if (Titanium.Platform.osname !== "android") {
 						responseNav.close();
@@ -298,17 +294,4 @@ getTransactionStatus.addEventListener('click', function() {
 	});
 });
 
-getNotification.addEventListener('click', function() {
-	Ti.API.info('Get Notification Button Clicked.');
-	var notificationWin = util.makeWindow("notificationUI.js","Notification");
-	notificationWin.open();
-/*	var win = Ti.UI.createWindow({
-		url : 'notificationUI.js',
-		backgroundColor : 'white',
-		modal : true,
-		type : 'SuccesfulRefund'
-	});
-	
-	win.open();
-	*/
-});
+
