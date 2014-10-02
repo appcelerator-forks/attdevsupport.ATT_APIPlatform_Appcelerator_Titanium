@@ -36,14 +36,14 @@ function checkSubCode () {
 	}
 }
 
-
-function checkSubCode () {
+function checkSubId () {
 	if(Ti.App.SubsConsumerId) {
 		return true;
 	} else {
 		return false;
 	}
 }
+
 responseWindow.addEventListener('android:back', function(e) {
 	if (webview !== null) {
 		responseWindow.remove(webview);
