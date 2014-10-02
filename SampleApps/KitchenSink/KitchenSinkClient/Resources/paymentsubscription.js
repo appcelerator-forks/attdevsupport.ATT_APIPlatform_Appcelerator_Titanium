@@ -123,7 +123,7 @@ var getSubscriptionStatus = Ti.UI.createButton({
 	top : Ti.UI.Android ? "75dp" : 75,
 	width : '100%',
 	topInteger : 75,
-	touchEnabled : checkSubCode();
+	touchEnabled : checkSubCode()
 });
 
 var getSubscriptionDetails = Ti.UI.createButton({
@@ -131,7 +131,7 @@ var getSubscriptionDetails = Ti.UI.createButton({
 	top : Ti.UI.Android ? "115dp" : 115,
 	width : '100%',
 	topInteger : 115,
-	touchEnabled : checkSubId();
+	touchEnabled : checkSubId()
 });
 
 
@@ -275,12 +275,15 @@ function signPayload() {
 			webview.addEventListener('load', function(e) {
 				var url = webview.getUrl(), index;
 				Ti.API.info('url ' + url);
-
-				if (url.indexOf('SubscriptionAuthCode') !== -1) {
-					index = url.indexOf("SubscriptionAuthCode");
-					Ti.App.subscriptionAuthCode = url.substr(index + 21, url.length + 1);
+				var qsObj = util.qs.parse(url);
+				if (qsObj.SubscriptionAuthCode) {
+					Ti.App.subscriptionAuthCode = qsObj.SubscriptionAuthCode;
 					getSubscriptionStatus.setTouchEnabled(true);
-					
+				}
+
+				if (qsObj.faultCode) {
+					alert("Error: Fault Code: " + qsObj.faultCode + ", Description: " + qsObj.faultDescription);
+				}	
 
 					responseWindow.remove(webview);
 					if (Titanium.Platform.osname !== "android") {
@@ -289,7 +292,7 @@ function signPayload() {
 					else {
 						responseWindow.close();
 					}
-				}
+				
 			});
 
 			responseWindow.add(webview);

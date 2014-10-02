@@ -161,11 +161,15 @@ function signPayload(callBack) {
 			webview.addEventListener('load', function(e) {
 				var url = webview.getUrl();
 				Ti.API.info('url ' + url);
-				if (url.indexOf('TransactionAuthCode') !== -1) {
-					index = url.indexOf("TransactionAuthCode");
-					authCode = url.substr(index + 20, url.length + 1);
-					Ti.App.AuthCode = authCode; //here
+				var qsObj = util.qs.parse(url);
+			
+            	  if(qsObj.faultCode) {
+            	  	alert("Error: Fault Code: " + qsObj.faultCode + ", Description: " + qsObj.faultDescription);
+            	  }
+				  if (qsObj.TransactionAuthCode)  {
+					Ti.App.AuthCode = qsObj.TransactionAuthCode; 
 					getTransactionStatus.setTouchEnabled(true);
+				}
 					responseWindow.remove(webview);
 					if (Titanium.Platform.osname !== "android") {
 						responseNav.close();
@@ -173,8 +177,8 @@ function signPayload(callBack) {
 					else {
 						responseWindow.close();
 					}
-				}
-			});
+				
+			}); 
 			responseWindow.add(webview);
 			if (Titanium.Platform.osname !== "android") {
 				responseNav.open();
