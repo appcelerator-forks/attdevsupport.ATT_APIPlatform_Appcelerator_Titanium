@@ -276,15 +276,15 @@ function signPayload() {
 				var url = webview.getUrl(), index;
 				Ti.API.info('url ' + url);
 				var qsObj = util.qs.parse(url);
+				
+				if (qsObj.faultCode) {
+					var errorMessage = "ERROR: Fault Code: " + qsObj.faultCode + ", Description: " + qsObj.faultDescription;
+	        	  	responseWindow.remove(webview);
+					openPopUp(errorMessage);
+				}	
 				if (qsObj.SubscriptionAuthCode) {
 					Ti.App.subscriptionAuthCode = qsObj.SubscriptionAuthCode;
 					getSubscriptionStatus.setTouchEnabled(true);
-				}
-
-				if (qsObj.faultCode) {
-					alert("Error: Fault Code: " + qsObj.faultCode + ", Description: " + qsObj.faultDescription);
-				}	
-
 					responseWindow.remove(webview);
 					if (Titanium.Platform.osname !== "android") {
 						responseNav.close();
@@ -292,7 +292,7 @@ function signPayload() {
 					else {
 						responseWindow.close();
 					}
-				
+				}
 			});
 
 			responseWindow.add(webview);

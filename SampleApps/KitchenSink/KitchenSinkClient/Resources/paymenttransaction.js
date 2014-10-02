@@ -162,22 +162,23 @@ function signPayload(callBack) {
 				var url = webview.getUrl();
 				Ti.API.info('url ' + url);
 				var qsObj = util.qs.parse(url);
-			
-            	  if(qsObj.faultCode) {
-            	  	alert("Error: Fault Code: " + qsObj.faultCode + ", Description: " + qsObj.faultDescription);
-            	  }
+	        	  if(qsObj.faultCode) {
+	        	  	var errorMessage = "ERROR: Fault Code: " + qsObj.faultCode + ", Description: " + qsObj.faultDescription;
+	        	  	responseWindow.remove(webview);
+					openPopUp(errorMessage);
+	        	  }
 				  if (qsObj.TransactionAuthCode)  {
 					Ti.App.AuthCode = qsObj.TransactionAuthCode; 
 					getTransactionStatus.setTouchEnabled(true);
-				}
 					responseWindow.remove(webview);
+
 					if (Titanium.Platform.osname !== "android") {
 						responseNav.close();
 					}
 					else {
 						responseWindow.close();
 					}
-				
+				}
 			}); 
 			responseWindow.add(webview);
 			if (Titanium.Platform.osname !== "android") {
