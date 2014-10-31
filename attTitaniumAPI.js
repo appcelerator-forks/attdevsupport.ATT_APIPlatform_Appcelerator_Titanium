@@ -6,7 +6,7 @@
 
  *
 
- * PhoneGap Plugins for the AT&T API Platform provide the following APIs:
+ * Titanium SDKs for the AT&T API Platform provide the following APIs:
 
  *
 
