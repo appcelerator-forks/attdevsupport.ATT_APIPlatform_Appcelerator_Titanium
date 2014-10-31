@@ -119,8 +119,18 @@ UserAuthOptionView.add(userAuthOptionView2);
 UserAuthOptionView.add(applyChangesBtn);
 
 applyChangesBtn.addEventListener('click',function(e) {
-    alert("Settings Applied. Existing User Auth token deleted");
-    attAPIs.ATT.userAuthToken.remove();
+	
+	if(!attAPIs.ATT.getCachedUserAuthToken) {
+	
+	attAPIs.ATT.accessToken.revoke(revokeSuccess,revokeFail);
+	function revokeSuccess (data) {
+		attAPIs.ATT.userAuthToken.remove();
+		alert("Settings Applied. Existing User Auth token revoked & deleted");
+	}
+	function revokeFail (err) {
+		alert(JSON.stringify(err));
+	}
+   		}
     Ti.App.Properties.setBool('bypass_onnetwork_auth',userAuthOptionButton1.value); // add current value of Checkbox.
     Ti.App.Properties.setBool('suppress_landing_page',userAuthOptionButton2.value);  // add current value of checkbox
     
@@ -202,15 +212,21 @@ buttonHolder.add(fetchButton);
 //Set up remove token Button
 var removeTokenButton = Ti.UI.createButton({
     right: constants.margin,
-    title: 'Remove',
+    title: 'Revoke',
     width: constants.buttonWidth
 });
 removeTokenButton.addEventListener('click',function(e) {
-    //TODO: remove the token
-    //textView.addText('clicked REMOVE button');
-    attAPIs.ATT.accessToken.remove();
-    
-    textView.addText('Token removed');
+	
+	attAPIs.ATT.accessToken.revoke(revokeSuccess,revokeFail);
+	
+	function revokeSuccess (data) {
+		attAPIs.ATT.accessToken.remove();
+		textView.addText('Token revoked');
+	}
+	function revokeFail (err) {
+		alert(JSON.stringify(err));
+	}
+
 });
 buttonHolder.add(removeTokenButton);
 
