@@ -120,9 +120,11 @@ UserAuthOptionView.add(applyChangesBtn);
 
 applyChangesBtn.addEventListener('click',function(e) {
 	
-	if(!attAPIs.ATT.getCachedUserAuthToken) {
-	
-	attAPIs.ATT.accessToken.revoke(revokeSuccess,revokeFail);
+	if(attAPIs.ATT.userAuthToken.token==null||attAPIs.ATT.userAuthToken.token==undefined) {
+		alert("Settings Applied");
+	}
+	else {
+	attAPIs.ATT.userAuthToken.revoke(revokeSuccess,revokeFail);
 	function revokeSuccess (data) {
 		attAPIs.ATT.userAuthToken.remove();
 		alert("Settings Applied. Existing User Auth token revoked & deleted");
