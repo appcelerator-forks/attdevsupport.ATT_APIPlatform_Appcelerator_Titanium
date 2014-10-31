@@ -10,7 +10,7 @@
 
  *
 
-  *• ATT.SMS
+ *• ATT.SMS
  *
  *• ATT.MMS
  * 
