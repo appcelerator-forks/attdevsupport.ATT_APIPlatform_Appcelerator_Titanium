@@ -55,11 +55,6 @@
     <property name="shortCode">XXXXXXXX</property>
     <property name="scope"></property>
     <property name="authScope"></property>
-    <property name="redirectUrl">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</property>
-    <property name="merchantID">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</property>
-    <property name="amount">0.99</property>
-    <property name="description">Purchase</property>
-    <property name="paymentServerUrl">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</property>
    
     <modules>
         
