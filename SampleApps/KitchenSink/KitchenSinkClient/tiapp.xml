@@ -55,6 +55,7 @@
     <property name="shortCode">XXXXXXXX</property>
     <property name="scope"></property>
     <property name="authScope"></property>
+    <property name="redirectUrl">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</property>
    
     <modules>
         
