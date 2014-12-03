@@ -1,3 +1,6 @@
+===============Release Notes===============
+• v2.4
+Added Support for AT&T API v4 
 ========================================================
 AT&T Appcelerator Titanium Mobile SDK - Titanium Modules
 ========================================================
@@ -9,18 +12,20 @@ The AT&T Titanium modules provide interfaces that facilitate access to the follo
 • Speech
 • Speech Custom Method
 • Text to Speech
-• In App Messaging
-
+• In-App Messaging
+• OAuth 2.0 Authentication Management
 
 Please view the modules located in the "Module" folder and then test out the AT&T Titanium Mobile SDK in our sample apps located in the "SampleApp" folder
 
+The Github Repository for the AT&T Titanium Mobile SDK can be found at https://github.com/attdevsupport/ATT_APIPlatform_Appcelerator_Titanium
+
 ===============Tested versions===============
-Titanium Studio: 3.1.2
-Titanium SDK: 3.1.3
-XCode 5.0
+Titanium Studio: 3.3.0
+Titanium SDK: 3.3.0
+XCode 5.1
 Android SDK r20.0.3
-iOS Simulator: iOS 6.0, iOS 7.0 for both iPhone and iPad Simulators
-Android Emulator: 4.0.3 WVGA800, 4.1.2 WVGA800
+iOS Simulator: iOS 6.0, iOS 7.1 for both iPhone and iPad Simulators
+Android Emulator: 4.0.3 WVGA800, 4.4.2 
 
 ===============Notes=====================
 

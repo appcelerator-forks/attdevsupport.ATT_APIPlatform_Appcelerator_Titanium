@@ -33,7 +33,7 @@
  *
  *• ATT.Speech
  *
- *• ATT.IMMN
+ *• ATT.InAppMessaging
  */
 <span id='ATT-method-getCachedAccessToken'>/**
 </span> * @method getCachedAccessToken Returns the accessToken used for requests that is stored in memory.  If there is no token, it returns undefined
@@ -355,29 +355,334 @@
  *
  *       });
  */
-<span id='ATT-IMMN'>/**
-</span> * @class ATT.IMMN &lt;b&gt;Introduction:&lt;/b&gt;
+<span id='ATT-InAppMessaging'>/**
+</span> * @class ATT.InAppMessaging &lt;b&gt;Introduction:&lt;/b&gt;
  *
- * The In-app Messaging from Mobile Number API enables your application to send and retrieve SMS and MMS messages on behalf of your customers’ regular AT&amp;T mobile phone numbers.
+ * The In-App Messaging API enables your application to send and retrieve SMS and MMS messages on behalf of your customers’ regular AT&amp;T mobile phone numbers.
  *
  * &lt;b&gt;Description:&lt;/b&gt;
  *
- * The In-app Messaging from Mobile Number API allows applications to send and receive SMS and MMS on behalf of a subscriber if that subscriber has given consent. When sending a message on behalf of a subscriber, that subscriber&#39;s MSISDN is retrieved from the subscriber’s consent information. The message is then forwarded to the recipients using the subscriber&#39;s MSISDN as the sender address. A developer can make a single API request and the AT&amp;T system will determine if the request is an SMS or an MMS message and select the correct transport mechanism accordingly.
- * &lt;br&gt;Some major advantages of using In-app Messaging from Mobile Number are:
- * Sending messages from your application: The IMMN Send Message operation allows your customers to send text and picture messages to any U.S. mobile phone using their own AT&amp;T phone number, from within your application. Message recipients can immediately recognize who sent the message.
+ * The In-App Messaging from Mobile Number API allows applications to send and receive SMS and MMS on behalf of a subscriber if that subscriber has given consent. When sending a message on behalf of a subscriber, that subscriber&#39;s MSISDN is retrieved from the subscriber’s consent information. The message is then forwarded to the recipients using the subscriber&#39;s MSISDN as the sender address. A developer can make a single API request and the AT&amp;T system will determine if the request is an SMS or an MMS message and select the correct transport mechanism accordingly.
+ * &lt;br&gt;Some major advantages of using In-App Messaging are:
+ * Sending messages from your application: The In-App Messaging Send Message operation allows your customers to send text and picture messages to any U.S. mobile phone using their own AT&amp;T phone number, from within your application. Message recipients can immediately recognize who sent the message.
  * 
  * Receiving messages in your application: Responses to the sent messages can be received by the user’s mobile phone or by your application using the Get Message Headers and Get Message Content operations. Your application can display messages received by the user’s mobile phone, allowing the conversation to continue from within your application.
  *
  * &lt;b&gt;Methods:&lt;/b&gt;
  *
- * 1) getMessageContent
+ * 1) createMessageIndex
  *
- * 2) getMessageHeaders
+ * 2) deleteMessage
  *
- * 3) sendMessage
+ * 3) deleteMessages
+ * 
+ * 4) getMessage
+ * 
+ * 5) getMessageContent
+ * 
+ * 6) getMessagesDelta
+ * 
+ * 7) getMessageIndexInfo
+ * 
+ * 8) getMessageList
+ * 
+ * 9) sendMessage
+ * 
+ * 10) getNotificationConnectionDetails
+ * 
+ * 11) updateMessage
+ * 
+ * 12) updateMessages
+ * 
  */
 
-<span id='ATT-IMMN-method-sendMessage'>/**
+<span id='ATT-InAppMessaging-method-createMessageIndex'>/**
+</span> * @method createMessageIndex
+ * This operation gives the developer the ability to create an index cache for the suscriber&#39;s inbox 
+ * @param {Object} options A JSON object containing the following properties:
+ * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
+ *
+ *• application/json
+ *
+ *• application/xml
+ * 
+ * The default value is: application/json
+ * @param {Function} success The callback function that is called when the method returns success.
+ * @param {Function} error The callback function that is called when the method returns an error.
+ * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. No content is returned, only HTTP Code 202 (Accepted)
+ * 
+ * &lt;strong&gt;Example:&lt;/strong&gt;
+ * 
+ * The following is an example of the getMessageHeaders method.
+ *
+ *          createMessageIndex({
+ *                  &#39;accept&#39; : &#39;application/json&#39;
+ *           }, function(data) {
+ *
+ *               success Callback
+ *
+ *           }, function(error) {
+ *
+ *               error Callback
+ *
+ *           });
+ */
+
+<span id='ATT-InAppMessaging-method-deleteMessage'>/**
+</span> * @method deleteMessage
+ * This operation gives the developer the ability to delete a specific message in an inbox.
+ * @param {Object} options A JSON object containing the following properties:
+ * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
+ *
+ *• application/json
+ *
+ *• application/xml
+ * 
+ * The default value is: application/json
+ * @param {String} options.messageId Id of the message that is intended to get deleted.
+ * @param {Function} success The callback function that is called when the method returns success.
+ * @param {Function} error The callback function that is called when the method returns an error.
+ * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. No content is returned, only HTTP Code 204 (No Content)
+ * 
+ * &lt;strong&gt;Example:&lt;/strong&gt;
+ * 
+ * The following is an example of the deleteMessage method.
+ *
+ *          deleteMessage({
+ *                  &#39;accept&#39; : &#39;application/json&#39;,
+ *					&#39;messageId&#39; : &#39;s01&#39;
+ *           }, function(data) {
+ *
+ *               success Callback
+ *
+ *           }, function(error) {
+ *
+ *               error Callback
+ *
+ *           });
+ */
+
+<span id='ATT-InAppMessaging-method-deleteMessages'>/**
+</span> * @method deleteMessages
+ * This operation gives the developer the ability to delete messages in an inbox. 
+ * @param {Object} options A JSON object containing the following properties:
+ * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
+ *
+ *• application/json
+ *
+ *• application/xml
+ * 
+ * The default value is: application/json
+ * @param {String} options.messageIds Comma delimited message ids.
+ * @param {Function} success The callback function that is called when the method returns success.
+ * @param {Function} error The callback function that is called when the method returns an error.
+ * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. 
+ * No content is returned, only HTTP Code 204 (No Content)
+ * 
+ * &lt;strong&gt;Example:&lt;/strong&gt;
+ * 
+ * The following is an example of the deleteMessage method.
+ *
+ *          deleteMessages({
+ *                  &#39;accept&#39; : &#39;application/json&#39;,
+ *					&#39;messageIds&#39; : &#39;s01,s02,s03&#39;
+ *           }, function(data) {
+ *
+ *               success Callback
+ *
+ *           }, function(error) {
+ *
+ *               error Callback
+ *
+ *           });
+ */
+
+<span id='ATT-InAppMessaging-method-getMessage'>/**
+</span> * @method getMessage
+ * The Get Message operation will get a single message from a subscriber&#39;s message inbox. 
+ * @param {Object} options A JSON object containing the following properties:
+ * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
+ *
+ *• application/json
+ *
+ *• application/xml
+ * 
+ * The default value is: application/json
+ * @param {String} options.messageId A message identifier representing a Subscriber Message in the AT&amp;T Messages environment.
+ * @param {Function} success The callback function that is called when the method returns success.
+ * @param {Function} error The callback function that is called when the method returns an error.
+ * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. 
+ * 
+ * &lt;strong&gt;Example:&lt;/strong&gt;
+ * 
+ * The following is an example of the getMessage method.
+ *
+ *          getMessage({
+ *                  &#39;accept&#39; : &#39;application/json&#39;,
+ *					&#39;messageId&#39; : &#39;s01&#39;
+ *           }, function(data) {
+ *
+ *               success Callback
+ *
+ *           }, function(error) {
+ *
+ *               error Callback
+ *
+ *           });
+ */
+
+
+<span id='ATT-InAppMessaging-method-getMessageContent'>/**
+</span> * @method getMessageContent
+ * This method uses information returned by getMessageList to enable applications to fetch one or more subscriber messages from the AT&amp;T Messages environment.
+ * @param {Object} options A JSON object containing the following properties:
+ * @param {String} [options.accept] Specifies the format of the body of the response. 
+ * 
+ * The default value is: application/json
+ * @param {String} options.messageId A message identifier representing a Subscriber Message in the AT&amp;T Messages environment.
+ * @param {String} options.partId A content identifier representing an attachment in the referenced Subscriber Message
+ * @param {Function} success The callback function that is called when the method returns success.
+ * @param {Function} error The callback function that is called when the method returns an error.
+ * @return {Object} An object containing the response. The format of the response is specified by the value of the accept parameter in the request. 
+ * 
+ * &lt;strong&gt;Example:&lt;/strong&gt;
+ * 
+ * The following is an example of the getMessageContent method.
+ *
+ *          getMessageContent({
+ *                  &#39;accept&#39; : &#39;application/json&#39;,
+ *					&#39;messageId&#39; : &#39;s01&#39;,
+ *					&#39;partId&#39; : &#39;1&#39;
+ *           }, function(data) {
+ *
+ *               success Callback
+ *
+ *           }, function(error) {
+ *
+ *               error Callback
+ *
+ *           });
+ */
+<span id='ATT-InAppMessaging-method-getDelta'>/**
+</span> * @method getDelta
+ * This method provides capability to check for updates by passing in a client state.
+ * This is typically used when a client goes from being offline to becoming online. If the subscriber’s mailbox index cache does not exist an error (409) would be returned to the client and the client would have to re-initialize the cache 
+ * @param {Object} options A JSON object containing the following properties:
+ * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
+ *
+ *• application/json
+ *
+ *• application/xml
+ * 
+ * The default value is: application/json
+ * @param {String} options.state state The client would have this string from a either the Get Message Index request, or from the getMessageList request.
+ * @param {Function} success The callback function that is called when the method returns success.
+ * @param {Function} error The callback function that is called when the method returns an error.
+ * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. 
+ * 
+ * &lt;strong&gt;Example:&lt;/strong&gt;
+ * 
+ * The following is an example of the getDelta method.
+ *
+ *          getDelta({
+ *                  &#39;accept&#39; : &#39;application/json&#39;,
+ *					&#39;state&#39; : &#39;xxxxxxxxxxxxxxxxxx&#39;
+ *           }, function(data) {
+ *
+ *               success Callback
+ *
+ *           }, function(error) {
+ *
+ *               error Callback
+ *
+ *           });
+ * &lt;i&gt; Note: xxxxxxxxxxxxxxxxxx represents the state of the Inbox &lt;/i&gt;
+ */
+
+<span id='ATT-InAppMessaging-method-getMessageIndexInfo'>/**
+</span> * @method getMessageIndexInfo
+ * This operation allows the developer to get the state, status and message count of the index cache for the subscriber’s inbox.
+ * @param {Object} options A JSON object containing the following properties:
+ * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
+ *
+ *• application/json
+ *
+ *• application/xml
+ * 
+ * The default value is: application/json
+ * @param {Function} success The callback function that is called when the method returns success.
+ * @param {Function} error The callback function that is called when the method returns an error.
+ * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. 
+ * 
+ * The messageIndexInfo object returned has the following parameters:
+ * @param {String} status This parameters indicates the status of the message index cache. The following values could be returned
+ *    &lt;ul&gt;
+ *    &lt;li&gt;NOT_INITIALIZED&lt;/li&gt;
+ *    &lt;li&gt;INITIALIZING&lt;/li&gt;
+ *	  &lt;li&gt;INITIALIZED&lt;/li&gt;
+ *    &lt;li&gt;ERROR&lt;/li&gt;
+ *    &lt;/ul&gt;
+ * @param {String} state This is an opaque string that denotes the current state of the mailbox in the platform.
+ * @param {Number} messageCount Number of message indexes cached for the subscriber
+ *
+ * &lt;strong&gt;Example:&lt;/strong&gt;
+ * 
+ * The following is an example of the getMessageIndexInfo method.
+ *
+ *          getMessageIndexInfo({
+ *                  &#39;accept&#39; : &#39;application/json&#39;
+ *           }, function(data) {
+ *
+ *               success Callback
+ *
+ *           }, function(error) {
+ *
+ *               error Callback
+ *
+ *           });
+ */
+
+<span id='ATT-InAppMessaging-method-getMessageList'>/**
+</span> * @method getMessageList
+ * Enables an application to retrieve meta-data for one or more Subscriber Messages from the AT&amp;T Messages environment.
+ * @param {Object} options A JSON object containing the following properties:
+ * @param {String} options.limit The number of messages to be returned:
+ *
+ * Valid Range: Min = 1, Max = 500
+ *
+ * If offset is defined, the number of messages defined in limit will be returned starting  with the first message defined by offset.
+ * @param {String} [options.offset] Defines an index value at which the limit starts.
+ * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
+ *
+ *• application/json
+ *
+ *• application/xml
+ * 
+ * The default value is: application/json
+ * @param {Function} success The callback function that is called when the method returns success.
+ * @param {Function} error The callback function that is called when the method returns an error.
+ * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request.
+ *
+ * &lt;strong&gt;Example:&lt;/strong&gt;
+ * 
+ * The following is an example of the getMessageList method.
+ *
+ *          getMessageList({
+ *                  &#39;accept&#39; : &#39;application/json&#39;,
+ *                  &#39;limit&#39; : 500 //Valid Range: Min = 1, Max = 500 // Should be integer
+ *                  &#39;offset&#39; : &#39;123&#39; //Define an index value at which offset will start.
+ *           }, function(data) {
+ *
+ *               success Callback
+ *
+ *           }, function(error) {
+ *
+ *               error Callback
+ *
+ *           });
+ */
+
+<span id='ATT-InAppMessaging-method-sendMessage'>/**
 </span> * @method sendMessage
  * Enables an application to send messages on behalf of an AT&amp;T subscriber. Each time the sendMessage method is invoked, a single message can be sent to one or more destination devices. Messages are processed synchronously and sent asynchronously to the destination.
  * @param {Object} options A JSON object containing the following properties:
@@ -385,6 +690,7 @@
  * @param {Array} options.body.Addresses The MSISDN of the recipient, or a comma separated list of MSISDNs for multiple recipients. For example: tel:6507038846,tel:6507038847.
  * @param {String} options.body.Subject The subject of the message.
  * @param {String} options.body.Text The text portion of the message. If the request is detected as MMS then the following character sets will be supported:
+ * @param {Boolean} options.body.isGroup If set to true the message is sent as a group MMS message as compared to a Broadcase message when sending to multiple recipients 
  *
  *• ASCII
  *
@@ -422,8 +728,9 @@
  * &lt;strong&gt;Examples:&lt;/strong&gt;
  *
  * &lt;b&gt;1.&lt;/b&gt; The following example of the sendMessage method uses a contentType of &#39;application/json&#39;.
+ *
  *      sendMessage({
- *                   &quot;body&quot;:{ &quot;Addresses&quot;: [&quot;mail@mail.mail&quot;,&quot;mail@mail.mail&quot;,&quot;tel:xxxxxxxxxx&quot;], &quot;Text&quot;: &quot;Hello world&quot;, &quot;Subject&quot;: &quot;Hi&quot; },
+ *                   &quot;body&quot;:{ &quot;MessageRequest&quot;: {&quot;Addresses&quot;: [&quot;mail@mail.mail&quot;,&quot;mail@mail.mail&quot;,&quot;tel:xxxxxxxxxx&quot;], &quot;Text&quot;: &quot;Hello world&quot;, &quot;Subject&quot;: &quot;Hi&quot; ,&quot;isGroup&quot;: false} },
  *                   &quot;contentType&quot; : &quot;application/json&quot;,
  *                   &quot;accept&quot; : &quot;application/json&quot;,
  *                   &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
@@ -435,14 +742,15 @@
  *
  *           error Callback
  *
- *      });
+ *       });
  *
  * &lt;b&gt;2.&lt;/b&gt; The following example of the sendMessage method uses a contentType of &#39;application/xml&#39;.
+ *  
  *      sendMessage({
  *                    &quot;body&quot;:&quot;&lt;MessageRequest&gt;&quot;+&quot;\n&quot;+&quot;&lt;Addresses&gt;tel:xxxxxxxxxx,tel:xxxxxxxxxx,mail@mail.mail&lt;/Addresses&gt;&quot;+&quot;\n&quot;+&quot;&lt;Text&gt;Hello world&lt;/Text&gt;&quot;+&quot;\n&quot;+&quot;&lt;Subject&gt;Hi&lt;/Subject&gt;&quot;+&quot;\n&quot;+&quot;&lt;/MessageRequest&gt;&quot;,
  *                    &quot;contentType&quot; : &quot;application/xml&quot;,
  *                    &quot;accept&quot; : &quot;application/json&quot;,
- *                   &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
+ *                    &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
  *        }, function(data) {
  *
  *           success Callback
@@ -457,7 +765,7 @@
  * &lt;b&gt;3.&lt;/b&gt; The following example of the sendMessage method uses a contentType of &#39;application/x-www-form-urlencoded&#39;.
  *
  *      sendMessage({
- *                   &quot;body&quot;:&quot;Addresses=tel%3A%2Bxxxxxxxxxx&amp;Addresses=tel%3A%2Bxxxxxxxxxx&amp;Addresses=mail@mail.mail&amp;Text=Hello&amp;Subject=Hi&quot;,
+ *                   &quot;body&quot;:&quot;Addresses=tel%3A%2Bxxxxxxxxxx&amp;Addresses=tel%3A%2Bxxxxxxxxxx&amp;Addresses=mail@mail.mail&amp;Text=Hello&amp;Subject=Hi&amp;isGroup=false&quot;,
  *                   &quot;contentType&quot; : &quot;application/x-www-form-urlencoded&quot;,
  *                   &quot;accept&quot; : &quot;application/json&quot;,
  *                  &quot;attachments&quot; : [{&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/png&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}, {&#39;fileName&#39; : &quot;Name of the file&quot;,&#39;fileType&#39; : &quot;type of the file like : image/jpeg&quot;,&#39;filePath&#39; :&quot;Path of the file&quot;}]
@@ -474,18 +782,11 @@
  * &lt;i&gt;Note: xxxxxxxxxx represents an AT&amp;T wireless number&lt;/i&gt;
  */
 
-<span id='ATT-IMMN-method-getMessageHeaders'>/**
-</span> * @method getMessageHeaders
- * Enables an application to retrieve meta-data for one or more Subscriber Messages from the AT&amp;T Messages environment.
+
+<span id='ATT-InAppMessaging-method-updateMessage'>/**
+</span> * @method updateMessage
+ * This operation allows the developer to update the flags that are associated with a specific message. The developer passes in the messageId &amp; flags
  * @param {Object} options A JSON object containing the following properties:
- * @param {String} options.headerCount The number of Headers to be returned:
- *
- * Valid Range: Min = 1, Max = 500
- *
- * The value of headerCount is relative to the most recent Subscriber message.
- *
- * If indexCursor is defined, headerCount will start with the first message defined by indexCursor.
- * @param {String} [options.indexCursor] Defines an index value at which the headerCount starts.
  * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
  *
  *• application/json
@@ -493,18 +794,21 @@
  *• application/xml
  * 
  * The default value is: application/json
+ * @param {String} options.messageId Id of the message that is intended to be updated.
+ * @param {Object} options.body An object containing all of the parameters that a user needs to update messages
+ * @param {Object} options.body.message Container for flags that need to be updated
  * @param {Function} success The callback function that is called when the method returns success.
  * @param {Function} error The callback function that is called when the method returns an error.
- * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request.
- *
+ * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. No content is returned, only HTTP Code 204 (No Content)
+ * 
  * &lt;strong&gt;Example:&lt;/strong&gt;
  * 
- * The following is an example of the getMessageHeaders method.
+ * The following is an example of the updateMessage method.
  *
- *          getMessageHeaders({
+ *          updateMessage({
  *                  &#39;accept&#39; : &#39;application/json&#39;,
- *                  &#39;headerCount&#39; : 500 //Valid Range: Min = 1, Max = 500 // Should be integer
- *                  &#39;indexCursor&#39; : &#39;123&#39; //Define an index value at which HeaderCount will start.
+ *					&#39;messageId&#39; : &#39;s01&#39;,
+ *					&#39;body&#39; : {&#39;message&#39;: {&#39;isUnread&#39; : true} }
  *           }, function(data) {
  *
  *               success Callback
@@ -515,13 +819,10 @@
  *
  *           });
  */
-
-<span id='ATT-IMMN-method-getMessageContent'>/**
-</span> * @method getMessageContent
- * Enables an application to retrieve media for one or more Subscriber Messages from the AT&amp;T Messages environment using information returned by the getMessageHeaders method.
+<span id='ATT-InAppMessaging-method-updateMessages'> /**
+</span> * @method updateMessages
+ * TThis operation allows the developer to update the flags that are associated with a collection of messages. The developer can pass in any number of messages
  * @param {Object} options A JSON object containing the following properties:
- * @param {String} options.messageId A message identifier representing a Subscriber Message in the AT&amp;T Messages environment.
- * @param {String} [options.partNumber] A content identifier representing an attachment in the referenced Subscriber Message.
  * @param {String} [options.accept] Specifies the format of the body of the response. Valid values are:
  *
  *• application/json
@@ -529,26 +830,31 @@
  *• application/xml
  * 
  * The default value is: application/json
+ * @param {Object} options.body An object containing all of the parameters that a user needs to update messages
+ * @param {Object} options.body.message Container for flags that need to be updated (message Id &amp; isUnread flag)
+ * @param {String} options.body.message.messageId Message Id of the message that needs to be updated
+ * @param {String} options.body.message.isUnread Desired value of the isUnread flag that the message will be updated to 
  * @param {Function} success The callback function that is called when the method returns success.
  * @param {Function} error The callback function that is called when the method returns an error.
- * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request.
- *
+ * @return {Object} An object containing the response. The format of the response (JSON or XML) is specified by the value of the accept parameter in the request. No content is returned, only HTTP Code 204 (No Content)
+ * 
  * &lt;strong&gt;Example:&lt;/strong&gt;
  * 
- * The following is an example of the getMessageContent method.
+ * The following is an example of the updateMessages method.
  *
- *      getMessageContent({
- *                  &#39;messageId&#39; : &quot;IMMN message ID that you get in response of sendMessage&quot;,
- *                  &#39;partNumber&#39; : &#39;1&#39;
- *       }, function(data) {
+ *          updateMessages({
+ *                  &#39;accept&#39; : &#39;application/json&#39;,
+ *					&#39;messageId&#39; : &#39;s01&#39;,
+ *					&#39;body&#39; : {&#39;message&#39;: {&#39;MessageId&#39;: &#39;s01&#39;,&#39;isUnread&#39; : true}, {&#39;MessageId&#39;: &#39;s03&#39;,&#39;isUnread&#39; : false} }
+ *           }, function(data) {
  *
- *           success Callback
+ *               success Callback
  *
- *       }, function(error) {
+ *           }, function(error) {
  *
- *           error Callback
+ *               error Callback
  *
- *       });
+ *           });
  */
 <span id='ATT-OAuth'>/**
 </span> * @class ATT.OAuth &lt;b&gt;Introduction:&lt;/b&gt;
@@ -573,7 +879,7 @@
  *
  * 1) Location API
  *
- * 2) In-app Messaging from Mobile Number API
+ * 2) In-App Messaging from Mobile Number API
  *
  * @param {Object} options A JSON object containing the following properties :
  * @param {String} options.clientId The API Key that is assigned to the application when the developer creates an application account at https://devconnect-api.att.com.
@@ -581,7 +887,7 @@
  *
  * • Terminal Location – TL.
  *
- * • In-app Messaging from Mobile Number – IMMN
+ * • In-App Messaging from Mobile Number – IMMN
  * @param {String} [options.redirectUrl] The URL where the subscriber’s browser will be redirected following completion of the authorization process. If this parameter is not present in the request, the AT&amp;T Gateway will use the value of provided OAuth Redirect URL that is provided by the developer in the AT&amp;T API Platform console when the application is registered.
  * @param {Function} success The callback function that is called when the method returns success.
  * @param {Function} error The callback function that is called when the method returns an error.
@@ -613,7 +919,7 @@
  *
  * This method must be directly called using the ATT namespace as in the following example: &lt;b&gt;ATT.authorize(&#39;apiKey&#39;,&#39;secretKey&#39;,&#39;scope&#39;,&#39;grantType&#39;,&#39;oAuthCode&#39;)&lt;/b&gt;
  *
- * When authorizing an application for use with the Location and In-app Messaging from Mobile Number APIs, the user must send their access key, secret key, scope, grantType, and OAuthCode.
+ * When authorizing an application for use with the Location and In App Messaging APIs, the user must send their access key, secret key, scope, grantType, and OAuthCode.
  *
  * @param {String} accessKey The API Key that is assigned to the application when the developer creates an application account at https://devconnect-api.att.com.
  * @param {String} secretKey The Secret Key that is assigned to the application when the developer creates an application account at https://devconnect-api.att.com.
@@ -1177,11 +1483,11 @@
  *  &lt;strong&gt;Examples:&lt;/strong&gt;
  *
  * &lt;b&gt;1.&lt;/b&gt; The following example of the refundTransaction method uses a contentType of &#39;application/json&#39;.
- *      refundTransaction({
- *                   &quot;body&quot;:{&quot;TransactionOperationStatus&quot;:&lt;value&gt;, &quot;RefundReasonCode&quot;:value, &quot;RefundReasonText&quot;:&lt;value&gt;},
+ *        refundTransaction({
+ *                   &quot;body&quot;:{&quot;TransactionOperationStatus&quot;:value, &quot;RefundReasonCode&quot;:value, &quot;RefundReasonText&quot;:value},
  *                   &quot;contentType&quot; : &quot;application/json&quot;,
  *                   &#39;transactionId&#39; : TransactionId returned by a call to getTransactionStatus,
- *                   &#39;action&#39; : &lt;action value&gt;
+ *                   &#39;action&#39; : action value
  *       }, function(data) {
  *
  *           success Callback
@@ -1197,7 +1503,7 @@
  *                    &quot;body&quot;:&quot;&lt;RefundTransactionRequest&gt;&lt;TransactionOperationStatus&gt;value&lt;/TransactionOperationStatus&gt;&lt;RefundReasonCode&gt;value&lt;/RefundReasonCode&gt; &lt;RefundReasonText&gt;value&lt;/RefundReasonText&gt;&lt;/RefundTransactionRequest&gt;&quot;,
  *                    &quot;contentType&quot; : &quot;application/xml&quot;,
  *                    &#39;transactionId&#39; : TransactionId returned by a call to getTransactionStatus,
- *                    &#39;action&#39; : &lt;action value&gt;
+ *                    &#39;action&#39; : action value
  *       }, function(data) {
  *
  *           success Callback
@@ -1230,8 +1536,8 @@
  *
  * The following is an example of the getSubscriptionDetails method.
  *       getSubscriptionDetails({
- *           &#39;consumerId&#39; : &lt;returns in response of Payment.getSubscriptionStatus&gt;,
- *           &#39;merchantSubscriptionId&#39; : &lt;returns in response of Payment.getSubscriptionStatus&gt;,
+ *           &#39;consumerId&#39; : returns in response of Payment.getSubscriptionStatus,
+ *           &#39;merchantSubscriptionId&#39; : returns in response of Payment.getSubscriptionStatus,
  *      },function(data) {
  *
  *         success Callback

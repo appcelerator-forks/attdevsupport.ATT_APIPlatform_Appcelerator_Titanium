@@ -56,10 +56,6 @@ For example,
     <property name="secretKey">place your secret key here</property>
     <property name="shortCode">place your short code here</property>
     <property name="scope">place your Scope here</property>
-    <property name="amount">put your payment amount value</property>
-    <property name="description">put your payment description here</property>
-    <property name="paymentServerUrl">http://att.somee.com/ATTNotifications/</property>
-
+    
    a) Get the access key, secret Key, and short code from developer.att.com
    b) scope value should be same as registered application at developer.att.com
-   c) update the paymentServerUrl value in Tiapp.xml with your own Payment server url.

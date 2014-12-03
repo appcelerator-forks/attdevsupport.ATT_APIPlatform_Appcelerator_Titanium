@@ -48,6 +48,7 @@ function formatFilePath(filePath) {
 
 var qs = {
     parse: function(qsString) {
+        qsString = qsString.replace(/\+/g, " ");
         var qsObj = {};
         qsString.split('&').forEach(function(param) {
             var paramParts = param.split('=');
@@ -317,7 +318,8 @@ function createGetAuthCodeView(win, authUrl, redirectUrl, codeCB, errorCB) {
     var calledCB = false,
         webView = Ti.UI.createWebView({
             modal: true,
-            url : authUrl
+            url : authUrl,
+            ignoreSslError:true
         });
     
     webView.addEventListener('load', function(e) {
@@ -475,6 +477,7 @@ exports.isDirectory = isDirectory;
 exports.formatFilePath = formatFilePath;
 exports.formatNumberStr = formatNumberStr;
 exports.makeWindow = makeWindow;
+exports.qs = qs;
 
 //Common values
 exports.state = state;
