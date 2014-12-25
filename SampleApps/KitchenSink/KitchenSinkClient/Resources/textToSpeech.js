@@ -58,6 +58,7 @@ scrollView.add(util.UI.createLabelView('Text', inputTextArea, { top : ttsConstan
 
 var pickerOptions = {
     borderColor : 'black'
+    backgroundColor: 'orange'
 };
 
 var languagePickerView = util.UI.createPicker(pickerOptions, ['', 'en-US', 'es-US']);
