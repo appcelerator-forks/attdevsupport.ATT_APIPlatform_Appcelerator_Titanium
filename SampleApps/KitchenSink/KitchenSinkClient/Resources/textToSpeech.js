@@ -57,7 +57,8 @@ var inputTextArea = Ti.UI.createTextArea({
 scrollView.add(util.UI.createLabelView('Text', inputTextArea, { top : ttsConstants.margin }));
 
 var pickerOptions = {
-    borderColor : 'black'
+    borderColor : 'black',
+    backgroundColor: 'orange'
 };
 
 var languagePickerView = util.UI.createPicker(pickerOptions, ['', 'en-US', 'es-US']);
